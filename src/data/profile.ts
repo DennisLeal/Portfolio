@@ -27,7 +27,7 @@ export type Profile = {
   hero: {
     body: string
     portraitSrc: string
-    portraitAlt: string // Added this to fix the build error
+    portraitAlt: string
   }
   socials: SocialLink[]
 }
