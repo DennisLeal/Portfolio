@@ -8,16 +8,9 @@ import {
   Coffee,
   Robot,
   Article,
-  FilmSlate,
-  UsersThree,
   Database,
-  SlackLogo,
-  MagnifyingGlass,
-  ChatCircleDots,
-  FlowArrow,
   PhoneCall,
   Browser,
-  Broadcast,
   Timer,
 } from '@/components/slab'
 import type { Icon } from '@/components/slab'
