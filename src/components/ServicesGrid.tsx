@@ -8,8 +8,6 @@ import { siteContent } from '@/data/siteContent'
  * ServicesGrid - the Services view on one glass sheet.
  */
 
-/* ---------- The method ---------- */
-
 type Stage = {
   index: string
   label: string
@@ -42,8 +40,6 @@ const STAGES: Stage[] = [
   },
 ]
 
-/* ---------- The services ---------- */
-
 const WFM_LOGO_MOCK = '/icons/vscode.svg'
 
 type Service = {
@@ -64,7 +60,6 @@ const SERVICES: Service[] = siteContent.services.map((s, i) => ({
   bullets: [s.description],
 }))
 
-/** The tool marks, stacked horizontally on white tiles (same as Projects). */
 function Marks({ logos }: { logos: string[] }) {
   return (
     <span className="bento__logos" aria-hidden="true">
@@ -76,8 +71,6 @@ function Marks({ logos }: { logos: string[] }) {
     </span>
   )
 }
-
-/* ---------- The page ---------- */
 
 export default function ServicesGrid() {
   return (
