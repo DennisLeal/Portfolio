@@ -4,7 +4,8 @@ import { profile } from '@/data/profile'
 import { siteContent } from '@/data/siteContent'
 
 /**
- * AboutGrid - the About view as a fixed viewport.
+ * AboutGrid - Updated to a flexible layout to prevent header overlap
+ * and support professional summaries of varying length.
  */
 
 const GITHUB = { src: '/icons/ai/github.svg', name: 'GitHub' }
@@ -43,8 +44,8 @@ const CAPABILITIES: Capability[] = [
 
 export default function AboutGrid() {
   return (
-    <section className="pgrid agrid" style={{ paddingTop: '100px' }} aria-labelledby="about-title">
-      <header className="pgrid__head">
+    <section className="pgrid" style={{ padding: '4rem 2rem' }} aria-labelledby="about-title">
+      <header className="pgrid__head" style={{ marginBottom: '3rem' }}>
         <span className="pgrid__eyebrow">About</span>
         <h1 className="pgrid__title" id="about-title">
           {`Hi, I’m ${profile.firstName}.`}
@@ -54,14 +55,23 @@ export default function AboutGrid() {
         </p>
       </header>
 
-      <div className="home__glass agrid__glass">
+      <div className="home__glass" style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gap: '3rem',
+        padding: '2rem',
+        borderRadius: '2rem',
+        background: 'var(--glass)',
+        backdropFilter: 'blur(12px)',
+        border: '1px solid var(--glass-border)'
+      }}>
         <div className="agrid__copy">
-          <p className="agrid__lead">
+          <p className="agrid__lead" style={{ fontSize: '1.25rem', lineHeight: '1.6', marginBottom: '1.5rem' }}>
             {siteContent.hero.about}
           </p>
 
-          <div className="agrid__note">
-            <p>
+          <div className="agrid__note" style={{ marginBottom: '2rem' }}>
+            <p style={{ opacity: 0.8, lineHeight: '1.6' }}>
               I focus on the critical infrastructure of the contact center, ensuring that
               the systems a global WFM team depends on are configured correctly and running without delay.
             </p>
@@ -69,7 +79,7 @@ export default function AboutGrid() {
 
           <ul className="agrid__caps" role="list">
             {CAPABILITIES.map((c) => (
-              <li key={c.index} className="agrid__cap">
+              <li key={c.index} className="agrid__cap" style={{ marginBottom: '1rem' }}>
                 <span className="agrid__cap-marks">
                   {c.marks.map((m, i) => (
                     <span
@@ -89,7 +99,7 @@ export default function AboutGrid() {
             ))}
           </ul>
 
-          <div className="agrid__bar">
+          <div className="agrid__bar" style={{ marginTop: '3rem' }}>
             <span className="agrid__cell">
               <span className="agrid__cell-mark agrid__cell-mark--img">
                 <img src="/icons/ai/github.svg" alt="GitHub" loading="lazy" decoding="async" />
@@ -123,12 +133,13 @@ export default function AboutGrid() {
           </div>
         </div>
 
-        <div className="agrid__portrait">
+        <div className="agrid__portrait" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <img
             src={profile.avatarSrc}
             alt={profile.hero.portraitAlt}
             loading="eager"
             decoding="async"
+            style={{ maxWidth: '100%', height: 'auto', borderRadius: '2rem' }}
             width={400}
             height={400}
           />
