@@ -11,6 +11,7 @@
  */
 
 import { Briefcase, SealCheck, Clock, type Icon } from '@/components/slab'
+import { siteContent } from '@/data/siteContent'
 
 export type SocialLink = {
   label: string
@@ -49,24 +50,24 @@ export const profile: Profile = {
   name: 'Dennis Leal',
   firstName: 'Dennis',
   handle: '@Papsitv',
-  role: 'Workforce Management Professional',
-  avatarSrc: '/avatar.svg',
+  role: 'Workforce Management Systems Specialist',
+  avatarSrc: '/ProfilePhoto.jpg',
   verifiedLabel: 'WFM Expert',
-  email: 'lealdennis110@gmail.com',
-  location: 'Philippines',
+  email: siteContent.hero.contact.email,
+  location: siteContent.hero.location,
   stats: [
     { value: '10+ yrs', label: 'Experience', Icon: Briefcase },
     { value: 'NICE IEX', label: 'Specialization', Icon: SealCheck },
     { value: 'GMT+8', label: 'Timezone', Icon: Clock },
   ],
-  displayName: { line1: 'Workforce Management', line2: 'Expertise' },
+  displayName: { line1: siteContent.hero.headline.split(' & ')[0], line2: siteContent.hero.headline.split(' & ')[1] },
   hero: {
-    body: 'Specializing in Real-Time Analysis, WFM supervision, and NICE IEX administration to optimize operational performance.',
-    portraitSrc: '/avatar.svg',
+    body: siteContent.hero.about,
+    portraitSrc: '/ProfilePhoto.jpg',
     portraitAlt: 'Dennis Leal Portrait',
   },
   socials: [
-    { label: 'LinkedIn profile', href: 'https://linkedin.com/in/dennis-l-0b52695b', iconPath: '/icons/linkedin.svg' },
-    { label: 'GitHub profile', href: 'https://github.com/Papsitv', iconPath: '/icons/github.svg' },
+    { label: 'LinkedIn profile', href: siteContent.hero.contact.linkedin, iconPath: '/icons/linkedin.svg' },
+    { label: 'GitHub profile', href: siteContent.hero.contact.github, iconPath: '/icons/github.svg' },
   ],
 }
