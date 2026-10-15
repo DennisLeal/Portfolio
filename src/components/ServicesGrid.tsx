@@ -44,18 +44,7 @@ const STAGES: Stage[] = [
 
 /* ---------- The services ---------- */
 
-const GHL = '/icons/gohighlevel.png'
-const REACT = '/icons/ai/react.svg'
-const TAILWIND = '/icons/ai/tailwindcss.svg'
-const VITE = '/icons/ai/vite.svg'
-const CLOUDFLARE = '/icons/ai/cloudflare.svg'
-const N8N = '/icons/ai/n8n.svg'
-const OPENAI = '/icons/openai.svg'
-const GWS = '/icons/googleworkspace.svg'
-const SLACK = '/icons/slack.svg'
-const CLAUDE_CODE = '/icons/claude-code-logo.png'
-const EXPO = '/icons/ai/expo.svg'
-const CHROME = '/icons/ai/googlechrome.svg'
+const WFM_LOGO_MOCK = '/icons/vscode.svg'
 
 type Service = {
   index: string
@@ -71,12 +60,9 @@ const SERVICES: Service[] = siteContent.services.map((s, i) => ({
   title: s.title,
   description: s.description,
   chip: 'Expert',
-  logos: [WFM_LOGO_MOCK, GWS, SLACK], // Simplified for the template logic
+  logos: [WFM_LOGO_MOCK, '/icons/googleworkspace.svg', '/icons/slack.svg'],
   bullets: [s.description],
 }))
-
-// Mock logo since the original file had a complex set of logos
-const WFM_LOGO_MOCK = '/icons/vscode.svg'
 
 /** The tool marks, stacked horizontally on white tiles (same as Projects). */
 function Marks({ logos }: { logos: string[] }) {
