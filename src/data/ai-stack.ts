@@ -1,18 +1,6 @@
 /**
  * The systems tree shown in the Projects "systems" pop-up (and as chips on
  * Home and in the Projects bento card).
- *
- * This file is the ONLY place node copy lives. AIStack.tsx and AIStackGrid.tsx
- * render whatever shape they find here, so swapping in content is a data edit
- * and never a JSX edit. Keep the exported names and types stable.
- *
- * Every value below is a PLACEHOLDER. Shape rules:
- * - The root is you. Its children are the categories (branches).
- * - A branch with `status` is itself a system; a branch without one is a
- *   group whose children are the systems.
- * - Status is what the thing actually does today: "Live" (in use by others),
- *   "Internal" (works, you use it), "Beta".
- * - Logo marks in AIStackGrid.tsx are keyed by the node `id` below.
  */
 
 import {
@@ -37,161 +25,94 @@ import { profile } from '@/data/profile'
 
 export type StackStatus = 'Live' | 'Internal' | 'Beta'
 
-/** A vendor mark, masked to a single ink colour so the row reads as one set
- *  rather than a rainbow of brand palettes. Only marks that already exist in
- *  public/icons are listed. */
 export type StackLogo = { src: string; name: string }
 
 export type StackNode = {
   id: string
   name: string
-  /** One plain sentence a non-technical client understands. */
   what: string
-  /** Real stack / model / where it runs. Rendered small and muted. */
   stack?: string
   status?: StackStatus
-  /** Phosphor glyph for the card's mark tile. Every node has one. */
   Icon: Icon
   logos?: StackLogo[]
   children?: StackNode[]
 }
 
-const ANTHROPIC: StackLogo = { src: '/icons/anthropic.svg', name: 'Anthropic' }
-const OPENAI: StackLogo = { src: '/icons/openai.svg', name: 'OpenAI' }
-const SLACK: StackLogo = { src: '/icons/slack.svg', name: 'Slack' }
-const NOUS: StackLogo = { src: '/icons/nousresearch.svg', name: 'Nous Research' }
+const WFM_LOGO: StackLogo = { src: '/icons/vscode.svg', name: 'WFM Tools' }
+const AI_LOGO: StackLogo = { src: '/icons/openai.svg', name: 'AI' }
 
-const WHAT = 'PLACEHOLDER - tell me what to put here: one plain line on what this does.'
-const STACK = 'PLACEHOLDER - model, tools, where it runs'
-
-/** Single root: you. Branches are the categories. */
 export const aiStack: StackNode = {
   id: 'root',
   Icon: Sparkle,
   name: profile.name,
-  what: 'PLACEHOLDER - tell me what to put here: one line on the systems you build and run.',
-  stack: 'PLACEHOLDER - your brand',
+  what: 'Workforce Management and AI-assisted automation systems.',
+  stack: 'NICE IEX & AI Agents',
   children: [
     {
-      id: 'project-a',
-      Icon: Coffee,
-      logos: [ANTHROPIC],
-      name: 'Project A',
-      what: WHAT,
-      stack: STACK,
-      status: 'Live',
-    },
-    {
-      id: 'category-one',
-      Icon: Robot,
-      name: 'Category One',
-      what: 'PLACEHOLDER - tell me what to put here: what the systems in this group have in common.',
-      children: [
-        {
-          id: 'project-b',
-          Icon: Article,
-          logos: [ANTHROPIC],
-          name: 'Project B',
-          what: WHAT,
-          stack: STACK,
-          status: 'Internal',
-        },
-        {
-          id: 'project-c',
-          Icon: FilmSlate,
-          logos: [OPENAI],
-          name: 'Project C',
-          what: WHAT,
-          stack: STACK,
-          status: 'Internal',
-        },
-        {
-          id: 'project-d',
-          Icon: UsersThree,
-          logos: [ANTHROPIC],
-          name: 'Project D',
-          what: WHAT,
-          stack: STACK,
-          status: 'Internal',
-        },
-      ],
-    },
-    {
-      id: 'category-two',
+      id: 'wfm-core',
       Icon: Database,
-      name: 'Category Two',
-      what: 'PLACEHOLDER - tell me what to put here: what the systems in this group have in common.',
+      name: 'WFM Operations',
+      what: 'Core workforce management and real-time analysis systems.',
       children: [
         {
-          id: 'project-e',
-          Icon: SlackLogo,
-          logos: [ANTHROPIC, SLACK],
-          name: 'Project E',
-          what: WHAT,
-          stack: STACK,
+          id: 'nice-iex',
+          Icon: PhoneCall,
+          logos: [WFM_LOGO],
+          name: 'NICE IEX',
+          what: 'Operational and functional administration and troubleshooting.',
+          stack: 'NICE IEX Administrator',
           status: 'Live',
         },
         {
-          id: 'project-f',
-          Icon: MagnifyingGlass,
-          logos: [ANTHROPIC],
-          name: 'Project F',
-          what: WHAT,
-          stack: STACK,
+          id: 'rt-analysis',
+          Icon: Timer,
+          logos: [WFM_LOGO],
+          name: 'Real-Time Analysis',
+          what: 'Intraday performance monitoring and service-level management.',
+          stack: 'RTA / Supervision',
           status: 'Live',
         },
       ],
     },
     {
-      id: 'category-three',
-      Icon: ChatCircleDots,
-      name: 'Category Three',
-      what: 'PLACEHOLDER - tell me what to put here: what the systems in this group have in common.',
+      id: 'ai-dev',
+      Icon: Robot,
+      name: 'AI Development',
+      what: 'Leveraging AI agents to build scalable software and logs.',
       children: [
         {
-          id: 'project-g',
-          Icon: FlowArrow,
-          logos: [ANTHROPIC],
-          name: 'Project G',
-          what: WHAT,
-          stack: STACK,
-          status: 'Live',
+          id: 'kcal-log',
+          Icon: Coffee,
+          logos: [AI_LOGO],
+          name: 'Kcal Log',
+          what: 'AI-assisted personal calorie logging application.',
+          stack: 'AI Assistant / Web',
+          status: 'Internal',
         },
         {
-          id: 'project-h',
-          Icon: PhoneCall,
-          logos: [ANTHROPIC],
-          name: 'Project H',
-          what: WHAT,
-          stack: STACK,
+          id: 'zelven-labs',
+          Icon: Browser,
+          logos: [AI_LOGO],
+          name: 'Zelven Labs',
+          what: 'Software initiative utilizing AI development agents.',
+          stack: 'AI Agents',
           status: 'Beta',
         },
-        {
-          id: 'project-i',
-          Icon: Browser,
-          logos: [ANTHROPIC],
-          name: 'Project I',
-          what: WHAT,
-          stack: STACK,
-          status: 'Live',
-        },
       ],
     },
     {
-      id: 'project-j',
-      Icon: Broadcast,
-      logos: [NOUS],
-      name: 'Project J',
-      what: WHAT,
-      stack: STACK,
-      status: 'Live',
+      id: 'data-tools',
+      Icon: Article,
+      name: 'Data & Reporting',
+      what: 'Advanced analytics and automated reporting tools.',
       children: [
         {
-          id: 'project-k',
-          Icon: Timer,
-          name: 'Project K',
-          what: WHAT,
-          stack: STACK,
+          id: 'excel-vba',
+          Icon: Database,
+          logos: [WFM_LOGO],
+          name: 'Excel/VBA Macros',
+          what: 'Automated lookup-driven reporting and training logs.',
+          stack: 'Advanced Excel / VBA',
           status: 'Live',
         },
       ],
