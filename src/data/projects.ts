@@ -22,77 +22,46 @@ export type MobileApp = AppProject
  * public/placeholders/ - swap in your own (960x514 works well).
  */
 const STATS: AppStat[] = [
-  { value: '0', label: 'Stat one' },
-  { value: '0', label: 'Stat two' },
-  { value: '0', label: 'Stat three' },
+  { value: '1', label: 'Project' },
+  { value: '100%', label: 'Completion' },
 ]
-
-const DESC = 'PLACEHOLDER - tell me what to put here: what the app does, who it is for, and where it is published.'
 
 export const mobileApps: MobileApp[] = [
   {
-    name: 'App Name One',
-    tagline: 'PLACEHOLDER - one-line tagline.',
-    description: DESC,
+    name: 'Kcal Log',
+    tagline: 'AI-assisted personal calorie logging.',
+    description: 'An innovative personal calorie logging application developed with AI assistance to simplify health tracking and nutritional monitoring.',
     imageSrc: '/placeholders/app-1.jpg',
     imagePosition: '50% 30%',
     accentColor: '#2563EB',
     stats: STATS,
-    badge: 'Badge',
-  },
-  {
-    name: 'App Name Two',
-    tagline: 'PLACEHOLDER - one-line tagline.',
-    description: DESC,
-    imageSrc: '/placeholders/app-2.jpg',
-    accentColor: '#7C3AED',
-    stats: STATS,
-    badge: 'Badge',
-  },
-  {
-    name: 'App Name Three',
-    tagline: 'PLACEHOLDER - one-line tagline.',
-    description: DESC,
-    imageSrc: '/placeholders/app-3.jpg',
-    accentColor: '#16A34A',
-    stats: STATS,
-    badge: 'Badge',
+    badge: 'AI Tool',
   },
 ]
 
 export const webApps: AppProject[] = [
   {
-    name: 'Web App One',
-    tagline: 'PLACEHOLDER - one-line tagline.',
-    description: DESC,
+    name: 'Zelven Labs',
+    tagline: 'AI development initiative.',
+    description: 'A software initiative utilizing advanced AI development agents to build scalable and efficient software solutions.',
     accentColor: '#0EA5E9',
     stats: STATS,
-    badge: 'Badge',
+    badge: 'Innovation',
   },
   {
-    name: 'Web App Two',
-    tagline: 'PLACEHOLDER - one-line tagline.',
-    description: DESC,
-    accentColor: '#EF4444',
+    name: 'WFM Tracking Workflow',
+    tagline: 'Excel-based training logs.',
+    description: 'Created a streamlined Excel-based tracking workflow specifically for training logs to increase visibility and reporting accuracy.',
+    accentColor: '#16A34A',
     stats: STATS,
-    badge: 'Badge',
+    badge: 'WFM',
   },
   {
-    name: 'Web App Three',
-    tagline: 'PLACEHOLDER - one-line tagline.',
-    description: DESC,
-    imageSrc: '/placeholders/project-3.jpg',
-    accentColor: '#0891B2',
-    stats: STATS,
-    badge: 'Badge',
-  },
-  {
-    name: 'Web App Four',
-    tagline: 'PLACEHOLDER - one-line tagline.',
-    description: DESC,
-    imageSrc: '/placeholders/project-4.jpg',
+    name: 'WFM Reporting Dashboard',
+    tagline: 'Lookup-driven reporting.',
+    description: 'Developed high-impact lookup-driven reporting and dashboards for real-time workforce management analytics.',
     accentColor: '#F59E0B',
     stats: STATS,
-    badge: 'Badge',
+    badge: 'Analytics',
   },
 ]

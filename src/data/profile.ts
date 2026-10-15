@@ -46,31 +46,27 @@ export type Profile = {
 }
 
 export const profile: Profile = {
-  name: 'Your Name',
-  firstName: 'Your Name',
-  handle: '@yourhandle',
-  role: 'PLACEHOLDER - your title',
+  name: 'Dennis Leal',
+  firstName: 'Dennis',
+  handle: '@Papsitv',
+  role: 'Workforce Management Professional',
   avatarSrc: '/avatar.svg',
-  verifiedLabel: 'PLACEHOLDER - what the tick means (e.g. a certification)',
-  email: 'you@example.com',
-  location: 'PLACEHOLDER - your city or timezone',
-  // Pick any icon from https://phosphoricons.com and import it above.
+  verifiedLabel: 'WFM Expert',
+  email: 'lealdennis110@gmail.com',
+  location: 'Philippines',
   stats: [
-    { value: '0 yrs', label: 'PLACEHOLDER', Icon: Briefcase },
-    { value: '#000', label: 'PLACEHOLDER', Icon: SealCheck },
-    { value: 'GMT+0', label: 'PLACEHOLDER', Icon: Clock },
+    { value: '10+ yrs', label: 'Experience', Icon: Briefcase },
+    { value: 'NICE IEX', label: 'Specialization', Icon: SealCheck },
+    { value: 'GMT+8', label: 'Timezone', Icon: Clock },
   ],
-  // The intro types this line, then flies it into the Home headline.
-  // Keep it short: two halves, 5-8 words total.
-  displayName: { line1: 'Your headline here.', line2: 'Keep it short.' },
+  displayName: { line1: 'Workforce Management', line2: 'Expertise' },
   hero: {
-    body: 'PLACEHOLDER - one line on what you do and who you do it for.',
+    body: 'Specializing in Real-Time Analysis, WFM supervision, and NICE IEX administration to optimize operational performance.',
     portraitSrc: '/avatar.svg',
-    portraitAlt: 'Portrait placeholder',
+    portraitAlt: 'Dennis Leal Portrait',
   },
   socials: [
-    { label: 'Facebook profile', href: '#', iconPath: '/icons/facebook.svg' },
-    { label: 'LinkedIn profile', href: '#', iconPath: '/icons/linkedin.svg' },
-    { label: 'Discord profile', href: '#', iconPath: '/icons/discord.svg' },
+    { label: 'LinkedIn profile', href: 'https://linkedin.com/in/dennis-l-0b52695b', iconPath: '/icons/linkedin.svg' },
+    { label: 'GitHub profile', href: 'https://github.com/Papsitv', iconPath: '/icons/github.svg' },
   ],
 }
