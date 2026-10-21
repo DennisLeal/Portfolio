@@ -5,6 +5,7 @@ import ThemeGlyph from './ThemeGlyph'
 import { HomeIcon, FolderIcon, StackIcon, StarIcon, UserIcon, MessageIcon } from './RailIcons'
 import { getTheme, toggleTheme, type Theme } from '@/lib/theme'
 import { profile } from '@/data/profile'
+import VisitorCounter from './VisitorCounter'
 
 /**
  * The profile rail: the fixed left column of the shell. It carries identity,
@@ -26,7 +27,7 @@ export const RAIL_LINKS = [
   { label: 'Contact', to: '/contact', Icon: MessageIcon },
 ] as const
 
-export default function Rail() {
+export default function Rail({ showVisits = true }: { showVisits?: boolean }) {
   const [theme, setThemeState] = useState<Theme>('light')
 
   // The pre-paint script owns the real value; read it once mounted so the
@@ -44,7 +45,10 @@ export default function Rail() {
           {profile.name}
           <SealCheck size={19} weight="fill" aria-label={profile.verifiedLabel} />
         </h2>
-        <p className="rail__handle">{profile.handle}</p>
+        <p className="rail__handle">
+          {profile.handle}
+          {showVisits && <VisitorCounter className="rail__visits" />}
+        </p>
 
         <div className="rail__actions">
           <ul className="rail__socials" role="list" aria-label="Social profiles">

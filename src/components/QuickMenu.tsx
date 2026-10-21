@@ -4,6 +4,7 @@ import ThemeGlyph from './ThemeGlyph'
 import { A11Y_OPEN_EVENT } from './AccessMenu'
 import { getTheme, toggleTheme, type Theme } from '@/lib/theme'
 import { useDismiss, type DismissReason } from '@/hooks/useDismiss'
+import VisitorCounter from './VisitorCounter'
 
 /**
  * The phone's one header control: a "more" button whose panel grows out of it
@@ -79,6 +80,8 @@ export default function QuickMenu({ className = '' }: { className?: string }) {
           <span className="qmenu__label">Accessibility</span>
           <CaretRight size={15} weight="bold" aria-hidden="true" className="qmenu__caret" />
         </button>
+        <span className="qmenu__sep" aria-hidden="true" />
+        <VisitorCounter className="qmenu__visits" />
       </div>
     </div>
   )

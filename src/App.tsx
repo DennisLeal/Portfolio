@@ -35,9 +35,8 @@ export default function App() {
   const FIXED_ROUTES = ['/', '/projects', '/testimonials', '/contact']
   const isFixed = FIXED_ROUTES.includes(pathname)
   // Below the shell breakpoint the rail is gone: a bottom tab bar navigates,
-  // the QuickMenu (theme + accessibility) floats top-right on every page but
-  // Home (whose profile header carries it), and the visits widget folds into
-  // that header.
+  // and the QuickMenu (theme, accessibility, and page views) floats top-right
+  // on every page but Home, whose profile header carries it.
   const phone = useIsPhone()
   const panelRef = useRef<HTMLElement>(null)
 
@@ -105,7 +104,7 @@ export default function App() {
       )}
       {phone && pathname !== '/' && <QuickMenu className="qmenu--float" />}
       <div className="shell">
-        <Rail />
+        <Rail showVisits={!phone} />
         <main
           ref={panelRef}
           id={SCROLLER_ID}
