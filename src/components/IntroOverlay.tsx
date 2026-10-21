@@ -28,7 +28,7 @@ import { profile } from '@/data/profile'
  * only - nothing here touches layout.
  */
 
-const WORDS = `${profile.displayName.line1} ${profile.displayName.line2}`.split(' ')
+const WORDS = `${profile.displayName.line1} | ${profile.displayName.line2}`.split(' ')
 
 const IGNITE_MS = 300
 const RUN_MS = 1600
