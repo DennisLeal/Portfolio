@@ -41,8 +41,8 @@ const CAPABILITIES: Capability[] = [
 
 export default function AboutGrid() {
   return (
-    <section className="pgrid agrid" style={{ padding: '4rem 2rem' }} aria-labelledby="about-title">
-      <header className="pgrid__head" style={{ marginBottom: '3rem' }}>
+    <section className="pgrid agrid" aria-labelledby="about-title">
+      <header className="pgrid__head">
         <span className="pgrid__eyebrow">About</span>
         <h1 className="pgrid__title" id="about-title">
           {`Hi, I’m ${profile.firstName}.`}
@@ -55,70 +55,69 @@ export default function AboutGrid() {
 
       <div className="home__glass agrid__glass">
         <div className="agrid__copy">
-          <p
-            className="agrid__lead"
-            style={{ fontSize: '1.25rem', lineHeight: '1.6', marginBottom: '1.5rem' }}
-          >
-            {siteContent.hero.about}
-          </p>
+          <p className="agrid__lead">{siteContent.hero.about}</p>
 
-          <div className="agrid__note">
-            <h2 className="agrid__section-title">Experience & education</h2>
-            <ul className="agrid__history" role="list">
-              {siteContent.careerPath.map((position) => (
-                <li key={`${position.employer}-${position.role}`}>
-                  <strong>{position.role}</strong>
-                  <span>
-                    {position.employer} · {position.period}
-                  </span>
-                </li>
-              ))}
-            </ul>
-            <ul className="agrid__history agrid__history--education" role="list">
-              {siteContent.education.map((item) => (
-                <li key={item.name}>
-                  <strong>{item.name}</strong>
-                  <span>
-                    {item.institution}
-                    {'year' in item && ` · ${item.year}`}
-                    {'detail' in item && ` · ${item.detail}`}
-                  </span>
-                </li>
-              ))}
-            </ul>
+          <div className="agrid__details">
+            <div className="agrid__note">
+              <h2 className="agrid__section-title">Experience & education</h2>
+              <ul className="agrid__history" role="list">
+                {siteContent.careerPath.map((position) => (
+                  <li key={`${position.employer}-${position.role}`}>
+                    <strong>{position.role}</strong>
+                    <span>
+                      {position.employer} · {position.period}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <ul className="agrid__history agrid__history--education" role="list">
+                {siteContent.education.map((item) => (
+                  <li key={item.name}>
+                    <strong>{item.name}</strong>
+                    <span>
+                      {item.institution}
+                      {'year' in item && ` · ${item.year}`}
+                      {'detail' in item && ` · ${item.detail}`}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="agrid__highlights">
+              <section className="agrid__metrics" aria-labelledby="resume-metrics-title">
+                <h2 className="agrid__section-title" id="resume-metrics-title">
+                  Selected résumé figures
+                </h2>
+                <ul className="agrid__metrics-list" role="list">
+                  {siteContent.resumeMetrics.map((metric) => (
+                    <li className="agrid__metric" key={metric.label}>
+                      <strong>{metric.value}</strong>
+                      <span>{metric.label}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              <ul className="agrid__caps" role="list">
+                {CAPABILITIES.map((c) => (
+                  <li key={c.index} className="agrid__cap">
+                    <span className="agrid__cap-marks" aria-hidden="true">
+                      <span className="agrid__mark">
+                        <c.Icon size={20} weight="duotone" />
+                      </span>
+                    </span>
+                    <span className="agrid__cap-title">{c.title}</span>
+                    <span className="agrid__cap-index" aria-hidden="true">
+                      {c.index}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          <section className="agrid__metrics" aria-labelledby="resume-metrics-title">
-            <h2 className="agrid__section-title" id="resume-metrics-title">
-              Selected résumé figures
-            </h2>
-            <ul className="agrid__metrics-list" role="list">
-              {siteContent.resumeMetrics.map((metric) => (
-                <li className="agrid__metric" key={metric.label}>
-                  <strong>{metric.value}</strong>
-                  <span>{metric.label}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <ul className="agrid__caps" role="list">
-            {CAPABILITIES.map((c) => (
-              <li key={c.index} className="agrid__cap">
-                <span className="agrid__cap-marks" aria-hidden="true">
-                  <span className="agrid__mark">
-                    <c.Icon size={20} weight="duotone" />
-                  </span>
-                </span>
-                <span className="agrid__cap-title">{c.title}</span>
-                <span className="agrid__cap-index" aria-hidden="true">
-                  {c.index}
-                </span>
-              </li>
-            ))}
-          </ul>
-
-          <div className="agrid__bar" style={{ marginTop: '3rem' }}>
+          <div className="agrid__bar">
             <span className="agrid__cell">
               <span className="agrid__cell-mark agrid__cell-mark--img">
                 <img src={`${ICONS}linkedin.svg`} alt="" loading="lazy" decoding="async" />
@@ -140,7 +139,7 @@ export default function AboutGrid() {
             </span>
 
             <a
-              className="agrid__cell agrid__cell--wide"
+              className="agrid__cell"
               href={profile.socials[0].href}
               target="_blank"
               rel="noopener noreferrer"
@@ -156,7 +155,7 @@ export default function AboutGrid() {
             </a>
 
             <a
-              className="agrid__cell agrid__cell--wide"
+              className="agrid__cell"
               href={profile.socials[1].href}
               target="_blank"
               rel="noopener noreferrer"

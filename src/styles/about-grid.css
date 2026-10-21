@@ -1,7 +1,7 @@
 /* ============================================
-   ABOUT - the fixed viewport
-   Head, then one glass sheet split in two: who I am on the left, the desk
-   illustration on the right. Sized to the panel, so nothing here scrolls.
+   ABOUT - compact profile and credentials
+   The profile stays readable at mid-sized widths, with the portrait beside
+   the content when there is room and stacked only on narrow screens.
    ============================================ */
 
 .agrid__glass { min-height: 0; }
@@ -21,6 +21,7 @@
   flex-direction: column;
   height: auto;
   min-height: 100%;
+  padding: clamp(24px, 4vh, 44px) var(--panel-x) clamp(32px, 5vh, 60px);
 }
 .home__glass.agrid__glass {
   display: grid;
@@ -28,9 +29,9 @@
   height: auto;
   flex: 0 0 auto;
 }
-@media (min-width: 1100px) {
+@media (min-width: 760px) {
   .home__glass.agrid__glass {
-    grid-template-columns: minmax(0, 1.28fr) minmax(260px, 0.72fr);
+    grid-template-columns: minmax(0, 1.45fr) minmax(220px, 0.7fr);
     align-items: start;
   }
 }
@@ -40,27 +41,32 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: clamp(10px, 1.5vh, 20px);
+  gap: clamp(12px, 1.6vh, 20px);
   min-height: 0;
   min-width: 0;
-  padding: clamp(4px, 1vh, 16px) 0 clamp(4px, 1vh, 16px) clamp(4px, 0.8vw, 16px);
+  padding: 0;
 }
 
-/* The statement. This is the only display-scale type inside the sheet, so it
-   is what the eye lands on after the page title. The second sentence is a
-   span rather than its own paragraph so the two always break as one block. */
+/* Keep the supplied profile summary prominent without letting it dominate the
+   page height. */
 .agrid__lead {
   margin: 0;
-  max-width: 26ch;
-  font-size: clamp(19px, min(1.75vw, 3.1vh), 32px);
-  font-weight: 700;
-  line-height: 1.22;
-  letter-spacing: -0.022em;
+  max-width: 68ch;
+  font-size: clamp(16px, 1vw, 18px);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.008em;
   color: var(--navy);
   flex: 0 0 auto;
 }
-.agrid__lead span { color: var(--muted); font-weight: 600; }
 
+.agrid__details {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(14px, 1.8vh, 22px);
+}
+.agrid__highlights { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .agrid__note {
   margin: 0;
   max-width: 58ch;
@@ -95,7 +101,7 @@
 .agrid__metrics-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
+  gap: 6px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -105,7 +111,7 @@
   flex-direction: column;
   gap: 4px;
   min-width: 0;
-  padding: 10px 12px;
+  padding: 8px 9px;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: var(--paper);
@@ -130,34 +136,27 @@
 .agrid__link:hover { color: var(--orange-ink); box-shadow: inset 0 -2px 0 var(--orange); }
 .agrid__link:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
 
-/* ---------- The capability ladder ----------
-   Four rows, each led by the real marks of what that work is built with. The
-   tools ARE the credential here, so they take the left edge and the label
-   follows them; a row of word chips said the same thing with nothing to look
-   at. Hairlines between rows, no card per row - four framed boxes stacked in
-   a pinned sheet reads as clutter. */
+/* ---------- Capabilities ---------- */
 .agrid__caps {
-  display: flex;
-  flex-direction: column;
-  margin: clamp(2px, 0.6vh, 8px) 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
   padding-left: 0;
   list-style: none;
   flex: 0 0 auto;
 }
 .agrid__cap {
-  --tile: clamp(28px, 2.2vw, 36px);
+  --tile: clamp(24px, 2.2vw, 32px);
   display: grid;
-  grid-template-columns: var(--tile) minmax(0, 1fr) auto;
+  grid-template-columns: var(--tile) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(10px, 1vw, 16px);
-  padding: clamp(7px, 1.1vh, 13px) 2px;
+  gap: 7px;
+  padding: 7px 2px;
   border-top: 1px solid var(--line);
 }
 .agrid__cap:last-child { border-bottom: 1px solid var(--line); }
 
-/* The marks overlap like a stack of cards. The overlap is a static margin -
-   only the lift is animated, and only on transform, so the row never reflows
-   while it plays. */
+/* The icon tile lifts on hover without changing the row layout. */
 .agrid__cap-marks { display: inline-flex; align-items: center; }
 .agrid__mark {
   display: grid;
@@ -190,6 +189,7 @@
   color: var(--navy);
 }
 .agrid__cap-index {
+  display: none;
   font-size: clamp(10.5px, 0.68vw, 12px);
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -204,8 +204,8 @@
    meta line - divided by a hairline. */
 .agrid__bar {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  margin-top: clamp(4px, 0.8vh, 10px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 0;
   border-radius: 16px;
   background: var(--paper);
   box-shadow:
@@ -360,30 +360,30 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: min(70vh, 680px);
+  max-height: min(44vh, 420px);
   object-fit: contain;
   border-radius: inherit;
-  filter: brightness(0.76) contrast(1.08) saturate(0.85);
+  filter: none;
 }
 
 /* ---------- Below the shell ---------- */
-@media (max-width: 1099px) {
+@media (max-width: 759px) {
   .home__glass.agrid__glass { display: flex; flex-direction: column; gap: 20px; }
   .agrid__copy { padding-left: 0; }
   .agrid__lead { max-width: none; }
-  .agrid__portrait { order: -1; width: min(100%, 360px); min-height: 0; margin-inline: auto; }
-  .agrid__portrait img { width: 100%; max-height: min(52vh, 520px); object-position: center 34%; }
+  .agrid__details { grid-template-columns: minmax(0, 1fr); }
+  .agrid__portrait { order: -1; width: min(100%, 280px); min-height: 0; margin-inline: auto; }
+  .agrid__portrait img { width: 100%; max-height: min(34vh, 280px); object-position: center 34%; }
 }
 @media (max-width: 720px) {
-  .agrid__bar { grid-template-columns: minmax(0, 1fr); }
+  .agrid__bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .agrid__cell + .agrid__cell { box-shadow: inset 0 1px 0 var(--line); }
   .agrid__certifications-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 560px) {
   .agrid__certifications-list { grid-template-columns: minmax(0, 1fr); }
-  .agrid__cap { grid-template-columns: var(--tile) minmax(0, 1fr); }
-  .agrid__cap-index { display: none; }
   .agrid__metrics-list { grid-template-columns: minmax(0, 1fr); }
+  .agrid__bar { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (prefers-reduced-motion: reduce) {
