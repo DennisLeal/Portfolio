@@ -28,7 +28,7 @@ npm run lint
 - `public/projects/` — project previews from the supplied project carousel.
 - `public/certifications/` — supplied LinkedIn Learning certificate images.
 - `public/ProfilePhoto.png` — supplied profile image.
-- The visitor count uses Hits.sh and counts page views, not unique people. See the Privacy Policy for its disclosure.
+- The visitor count uses visitor-badge.laobi.icu and counts page views, not unique people. See the Privacy Policy for its disclosure.
 
 ## Credits
 

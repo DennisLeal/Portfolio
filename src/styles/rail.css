@@ -90,7 +90,7 @@
     font-variant-numeric: tabular-nums;
   }
   .rail__visits::before { content: ' · '; color: var(--muted); font-weight: 400; }
-  .rail__visits img { display: block; width: 48px; height: 20px; }
+  .rail__visits img { display: block; width: 60px; height: 20px; }
   .rail__visits .visitor-counter__unavailable { font-size: 11px; }
 
   /* Round-button row: the three social plates plus the theme switch. One row,

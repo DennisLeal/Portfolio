@@ -31,8 +31,8 @@ export default function Privacy() {
           <h2>What is collected</h2>
           <p>
             This site displays a page-view counter provided by{' '}
-            <a href="https://hits.sh/" target="_blank" rel="noopener noreferrer">
-              Hits.sh
+            <a href="https://visitor-badge.laobi.icu/" target="_blank" rel="noopener noreferrer">
+              visitor-badge.laobi.icu
             </a>
             . Loading the counter sends a request to that service, which receives the technical
             information normally sent with a web request. The counter records page views, not

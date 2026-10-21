@@ -194,7 +194,7 @@
     font-weight: 600;
     text-decoration: none;
   }
-  .qmenu__visits img { display: block; width: 48px; height: 20px; }
+  .qmenu__visits img { display: block; width: 60px; height: 20px; }
   .qmenu__visits .visitor-counter__unavailable { font-size: 11px; }
   .qmenu__row {
     --tg-bg: var(--paper); /* ThemeGlyph's cutter matches the panel */
