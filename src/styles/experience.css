@@ -1,0 +1,103 @@
+.egrid {
+  height: auto;
+  min-height: 100%;
+}
+
+.egrid__timeline {
+  display: grid;
+  gap: clamp(16px, 2.2vw, 28px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.egrid__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: clamp(12px, 1.5vw, 20px);
+  align-items: start;
+}
+
+.egrid__item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  top: 42px;
+  bottom: calc(clamp(16px, 2.2vw, 28px) * -1);
+  left: 20px;
+  width: 1px;
+  background: var(--line-strong);
+}
+
+.egrid__marker {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--orange-ink);
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.egrid__card {
+  min-width: 0;
+  padding: clamp(16px, 2vw, 26px);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  box-shadow: 0 14px 34px -26px rgba(6, 12, 26, 0.45);
+}
+
+.egrid__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 16px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.egrid__role {
+  margin-top: 8px;
+  color: var(--navy);
+  font-size: clamp(18px, 1.45vw, 24px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.egrid__employer {
+  margin-top: 3px;
+  color: var(--orange-ink);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.egrid__highlights {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding-left: 20px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.egrid__highlights li::marker { color: var(--orange); }
+
+@media (max-width: 639px) {
+  .egrid__item { grid-template-columns: 32px minmax(0, 1fr); gap: 10px; }
+  .egrid__item:not(:last-child)::before { left: 15px; top: 32px; }
+  .egrid__marker { width: 32px; height: 32px; font-size: 10px; }
+  .egrid__card { padding: 14px; }
+  .egrid__highlights { margin-top: 12px; font-size: 13px; }
+}
+
+[data-theme='dark'] .egrid__card { background: var(--paper); }

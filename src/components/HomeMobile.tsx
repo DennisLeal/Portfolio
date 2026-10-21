@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { SealCheck, CaretRight, Quotes, Stack } from '@/components/slab'
+import { SealCheck, CaretRight, Quotes, Stack, Briefcase } from '@/components/slab'
 import { profile } from '@/data/profile'
 import { siteContent } from '@/data/siteContent'
 import QuickMenu from './QuickMenu'
@@ -87,6 +87,14 @@ const TILES = [
   },
   {
     n: '05',
+    label: 'Work Experience',
+    to: '/experience',
+    title: 'Career history',
+    desc: 'Roles across NICE IEX support, WFM, real-time operations, and client support.',
+    Icon: Briefcase,
+  },
+  {
+    n: '06',
     label: 'About',
     to: '/about',
     title: `Hi, I'm ${profile.firstName}.`,

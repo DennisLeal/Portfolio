@@ -2,7 +2,15 @@ import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { SealCheck } from '@/components/slab'
 import ThemeGlyph from './ThemeGlyph'
-import { HomeIcon, FolderIcon, StackIcon, StarIcon, UserIcon, MessageIcon } from './RailIcons'
+import {
+  HomeIcon,
+  FolderIcon,
+  ExperienceIcon,
+  StackIcon,
+  StarIcon,
+  UserIcon,
+  MessageIcon,
+} from './RailIcons'
 import { getTheme, toggleTheme, type Theme } from '@/lib/theme'
 import { profile } from '@/data/profile'
 import VisitorCounter from './VisitorCounter'
@@ -21,6 +29,7 @@ import VisitorCounter from './VisitorCounter'
 export const RAIL_LINKS = [
   { label: 'Home', to: '/', Icon: HomeIcon },
   { label: 'Projects', to: '/projects', Icon: FolderIcon },
+  { label: 'Work Experience', to: '/experience', Icon: ExperienceIcon },
   { label: 'Services', to: '/services', Icon: StackIcon },
   { label: 'Testimonials', to: '/testimonials', Icon: StarIcon },
   { label: 'About', to: '/about', Icon: UserIcon },
