@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react'
 import { copyFileSync } from 'node:fs'
 import path from 'node:path'
 
+const base = process.env.GITHUB_ACTIONS === 'true' ? '/Portfolio/' : '/'
+
 function githubPagesSpaFallback() {
   return {
     name: 'github-pages-spa-fallback',
@@ -15,7 +17,7 @@ function githubPagesSpaFallback() {
 }
 
 export default defineConfig({
-  base: '/Portfolio/',
+  base,
   plugins: [react(), githubPagesSpaFallback()],
   resolve: {
     alias: {
