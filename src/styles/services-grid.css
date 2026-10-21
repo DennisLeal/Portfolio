@@ -230,13 +230,12 @@
 }
 @media (min-width: 1100px) {
   .sgrid__services {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: none;
   }
 }
 .sgrid__service { list-style: none; }
-/* Every row lines up across the five cards: the description and each bullet
-   reserve two lines whether they need them or not. */
+/* Keep the service descriptions aligned within each row. */
 .sgrid__service .bento__desc { min-height: calc(2 * 1.4em); }
 .sgrid__service-top {
   display: flex;

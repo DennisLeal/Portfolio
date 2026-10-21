@@ -70,6 +70,56 @@
   flex: 0 0 auto;
 }
 .agrid__note strong { color: var(--navy); font-weight: 700; }
+.agrid__section-title {
+  margin: 0 0 8px;
+  color: var(--navy);
+  font-size: clamp(14px, 0.95vw, 17px);
+  font-weight: 700;
+}
+.agrid__history {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.agrid__history li { display: grid; gap: 2px; }
+.agrid__history strong { color: var(--navy); font-weight: 700; }
+.agrid__history span { font-size: 0.92em; }
+.agrid__history--education {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.agrid__metrics { flex: 0 0 auto; }
+.agrid__metrics-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.agrid__metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+}
+.agrid__metric strong {
+  color: var(--orange-ink);
+  font-size: clamp(16px, 1.2vw, 21px);
+  line-height: 1;
+}
+.agrid__metric span {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
 .agrid__link {
   color: var(--navy);
   font-weight: 600;
@@ -95,13 +145,9 @@
   flex: 0 0 auto;
 }
 .agrid__cap {
-  /* One tile size drives the stack and the column reserved for it. The
-     column is sized for the widest stack (five marks) so every label starts
-     on the same x whether its row carries three logos or five. */
   --tile: clamp(28px, 2.2vw, 36px);
-  --overlap: 5px;
   display: grid;
-  grid-template-columns: calc(5 * var(--tile) - 4 * var(--overlap) + var(--overlap)) minmax(0, 1fr) auto;
+  grid-template-columns: var(--tile) minmax(0, 1fr) auto;
   align-items: center;
   gap: clamp(10px, 1vw, 16px);
   padding: clamp(7px, 1.1vh, 13px) 2px;
@@ -112,27 +158,23 @@
 /* The marks overlap like a stack of cards. The overlap is a static margin -
    only the lift is animated, and only on transform, so the row never reflows
    while it plays. */
-.agrid__cap-marks { display: inline-flex; align-items: center; padding-left: var(--overlap); }
+.agrid__cap-marks { display: inline-flex; align-items: center; }
 .agrid__mark {
   display: grid;
   place-items: center;
   width: var(--tile);
   height: var(--tile);
-  margin-left: calc(-1 * var(--overlap));
+  margin-left: 0;
   border-radius: 9px;
   background: var(--white);
   box-shadow:
     inset 0 0 0 1px var(--line-strong),
     0 2px 6px -3px rgba(6, 12, 26, 0.35);
-  /* Descending, so later marks sit UNDER earlier ones and the stack reads
-     left to right the way the eye scans it. */
-  z-index: var(--i);
   transition: transform 260ms var(--ease-spring);
 }
-.agrid__mark img {
+.agrid__mark svg {
   width: 58%;
   height: 58%;
-  object-fit: contain;
 }
 .agrid__cap:hover .agrid__mark { transform: translateY(-3px); }
 .agrid__cap:hover .agrid__mark:nth-child(2) { transition-delay: 40ms; }
@@ -339,9 +381,9 @@
 }
 @media (max-width: 560px) {
   .agrid__certifications-list { grid-template-columns: minmax(0, 1fr); }
-  /* The index has no room to earn its column at this width. */
-  .agrid__cap { grid-template-columns: calc(5 * var(--tile) - 4 * var(--overlap) + var(--overlap)) minmax(0, 1fr); }
+  .agrid__cap { grid-template-columns: var(--tile) minmax(0, 1fr); }
   .agrid__cap-index { display: none; }
+  .agrid__metrics-list { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (prefers-reduced-motion: reduce) {

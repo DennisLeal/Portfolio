@@ -8,15 +8,13 @@ import {
   Medal,
   Stack,
   Quotes,
-  FunnelSimple,
-  Gear,
-  AddressBook,
-  Globe,
-  AppWindow,
   SealCheck,
+  Database,
+  Timer,
+  Article,
+  Coffee,
+  ShieldCheck,
 } from '@/components/slab'
-import { gymFunnel, bookingFunnel, websiteFunnel, type Funnel } from '@/data/funnels'
-import { aiStack, type StackNode } from '@/data/ai-stack'
 import { profile } from '@/data/profile'
 import { siteContent } from '@/data/siteContent'
 
@@ -30,36 +28,26 @@ import { siteContent } from '@/data/siteContent'
  * height and Home stays a single viewport.
  */
 
-const thumbSrc = (f: Funnel) =>
-  `/home/${f.dir ?? 'funnels'}-${f.file.replace('.html', '.jpeg')}`
+const PROJECT_SHOTS = siteContent.projects.flatMap((project) =>
+  project.imageSrc ? [project.imageSrc] : [],
+)
 
-const PROJECT_SHOTS = [gymFunnel[0], bookingFunnel[0], websiteFunnel[0], gymFunnel[1]].filter(Boolean)
-
-const OFFERS = [
-  { Icon: FunnelSimple, title: 'Service One', note: 'PLACEHOLDER one-liner' },
-  { Icon: Gear, title: 'Service Two', note: 'PLACEHOLDER one-liner' },
-  { Icon: AddressBook, title: 'Service Three', note: 'PLACEHOLDER one-liner' },
-  { Icon: Globe, title: 'Service Four', note: 'PLACEHOLDER one-liner' },
-  { Icon: AppWindow, title: 'Service Five', note: 'PLACEHOLDER one-liner' },
-] as const
+const OFFER_ICONS = [Database, Timer, Article, User, Stack]
+const OFFERS = siteContent.services.slice(0, OFFER_ICONS.length).map((service, index) => ({
+  ...service,
+  Icon: OFFER_ICONS[index],
+}))
 
 // Three photos of you, fanned. Small copies are fine - the fan shows them under 100px.
 const PHOTOS = [profile.avatarSrc, profile.avatarSrc, profile.avatarSrc]
 
-/** The AI systems as a flat list: every leaf of the Projects tree, in order. */
-const leaves = (n: StackNode): StackNode[] =>
-  n.children?.length ? n.children.flatMap(leaves) : [n]
-const AI_BUILDS = leaves(aiStack)
+const AI_PROJECTS = [
+  { name: 'Kcal Log', Icon: Coffee },
+  { name: 'WinSentinel', Icon: ShieldCheck },
+  { name: 'Zelven Labs', Icon: Robot },
+]
 
-function CardHead({
-  Icon,
-  title,
-  desc,
-}: {
-  Icon: typeof FolderOpen
-  title: string
-  desc: string
-}) {
+function CardHead({ Icon, title, desc }: { Icon: typeof FolderOpen; title: string; desc: string }) {
   return (
     <header className="bento__head">
       <span className="bento__label">
@@ -75,19 +63,23 @@ function CardHead({
 }
 
 export default function HomeBento() {
-  const half = Math.ceil(AI_BUILDS.length / 2)
-  const toolRows = [AI_BUILDS.slice(0, half), AI_BUILDS.slice(half)]
+  const half = Math.ceil(AI_PROJECTS.length / 2)
+  const toolRows = [AI_PROJECTS.slice(0, half), AI_PROJECTS.slice(half)]
 
   return (
     <nav className="bento" aria-label="Explore the portfolio">
-      {/* Projects: the funnel thumbnails drift upward on a looped track. */}
+      {/* Projects: project screenshots from the supplied carousel. */}
       <Link to="/projects" className="bento__card bento__card--projects">
-        <CardHead Icon={FolderOpen} title="Projects" desc="PLACEHOLDER - one line on what your projects are." />
+        <CardHead
+          Icon={FolderOpen}
+          title="Projects"
+          desc="WFM Excel workflows and personal software projects."
+        />
         <div className="bento__media bento__reel" aria-hidden="true">
           <div className="bento__reel-track">
-            {[...PROJECT_SHOTS, ...PROJECT_SHOTS].map((f, i) => (
+            {[...PROJECT_SHOTS, ...PROJECT_SHOTS].map((src, i) => (
               <span key={i} className="bento__shot">
-                <img src={thumbSrc(f)} alt="" loading="lazy" decoding="async" />
+                <img src={src} alt="" loading="lazy" decoding="async" />
               </span>
             ))}
           </div>
@@ -96,7 +88,11 @@ export default function HomeBento() {
 
       {/* About: a fanned stack of photos. */}
       <Link to="/about" className="bento__card bento__card--about">
-        <CardHead Icon={User} title="About" desc="PLACEHOLDER - one line about you." />
+        <CardHead
+          Icon={User}
+          title="About"
+          desc="IEX Administrator with 10+ years across WFM and real-time operations."
+        />
         <div className="bento__media bento__fan" aria-hidden="true">
           {PHOTOS.map((src, i) => (
             <span key={`${src}-${i}`} className="bento__photo" style={{ ['--i' as string]: i }}>
@@ -106,16 +102,19 @@ export default function HomeBento() {
         </div>
       </Link>
 
-      {/* AI builds: the systems from the Projects tree, two chip rows
-          scrolling against each other. */}
+      {/* Personal software projects, shown as project-name chips. */}
       <Link to="/projects" className="bento__card bento__card--ai">
-        <CardHead Icon={Robot} title="AI Builds" desc="PLACEHOLDER - one line on your AI or side builds." />
+        <CardHead
+          Icon={Robot}
+          title="AI-Assisted Projects"
+          desc="Kcal Log, WinSentinel, and the Zelven Labs initiative."
+        />
         <div className="bento__media bento__chips" aria-hidden="true">
           {toolRows.map((row, r) => (
             <div key={r} className="bento__chip-row" data-dir={r ? 'right' : 'left'}>
               <div className="bento__chip-track">
                 {[...row, ...row].map((n, i) => (
-                  <span key={`${n.id}-${i}`} className="bento__chip" data-status={n.status}>
+                  <span key={`${n.name}-${i}`} className="bento__chip">
                     <n.Icon size={15} weight="duotone" />
                     {n.name}
                   </span>
@@ -146,16 +145,20 @@ export default function HomeBento() {
 
       {/* Services: the five offers as a compact index. */}
       <Link to="/services" className="bento__card bento__card--services">
-        <CardHead Icon={Stack} title="Services" desc="PLACEHOLDER - what you offer, and to whom." />
+        <CardHead
+          Icon={Stack}
+          title="Support Areas"
+          desc="NICE IEX troubleshooting, WFM operations, and Excel work."
+        />
         <ul className="bento__media bento__offers" role="list">
-          {OFFERS.map(({ Icon, title, note }, i) => (
+          {OFFERS.map(({ Icon, title, description }, i) => (
             <li key={title} className="bento__offer" style={{ '--i': i } as React.CSSProperties}>
               <span className="bento__offer-tile">
                 <Icon size={15} weight="duotone" aria-hidden="true" />
               </span>
               <span className="bento__offer-text">
                 <span className="bento__offer-title">{title}</span>
-                <span className="bento__offer-note">{note}</span>
+                <span className="bento__offer-note">{description}</span>
               </span>
               <span className="bento__offer-num" aria-hidden="true">
                 0{i + 1}
@@ -167,7 +170,11 @@ export default function HomeBento() {
 
       {/* Testimonials: client cards drifting up a clipped column. */}
       <Link to="/testimonials" className="bento__card bento__card--quotes">
-        <CardHead Icon={Quotes} title="Testimonials" desc="Recommendations from former colleagues." />
+        <CardHead
+          Icon={Quotes}
+          title="Testimonials"
+          desc="Recommendations from former colleagues."
+        />
         <div className="bento__media bento__reviews" aria-hidden="true">
           <div className="bento__reviews-track">
             {[...siteContent.testimonials, ...siteContent.testimonials].map((testimonial, i) => (

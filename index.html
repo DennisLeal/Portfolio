@@ -6,50 +6,61 @@
          shell pads with is 0. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <!-- PLACEHOLDER - SEO. Replace the title, description, URLs and share image. -->
-    <title>Your Name - Your Title</title>
-    <meta name="description" content="PLACEHOLDER - one sentence on what you do and who you do it for." />
-    <meta name="author" content="Your Name" />
+    <title>Dennis Leal — IEX Administrator | WFM Support</title>
+    <meta
+      name="description"
+      content="Dennis Leal is an IEX Administrator with 10+ years in contact-center workforce management, real-time operations, and technical troubleshooting."
+    />
+    <meta name="author" content="Dennis Leal" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <!-- The browser bar takes the page colour (--cream per theme); the inline
          theme script below and lib/theme.ts keep it in step with the toggle.
          Literal hex here only because this runs before any stylesheet loads. -->
     <meta name="theme-color" content="#F4F4ED" />
-    <!-- <link rel="canonical" href="https://yoursite.com/" /> -->
+    <link rel="canonical" href="https://dennisleal.github.io/Portfolio/" />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
 
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
     <!-- The rail avatar is above the fold on every desktop route. Keep this in
          sync with profile.avatarSrc in src/data/profile.ts. -->
-    <link rel="preload" as="image" href="%BASE_URL%ProfilePhoto.png" fetchpriority="high" media="(min-width: 1100px)" />
+    <link
+      rel="preload"
+      as="image"
+      href="%BASE_URL%ProfilePhoto.png"
+      fetchpriority="high"
+      media="(min-width: 1100px)"
+    />
 
-    <!-- Open Graph / social share. og:image must be an absolute URL once you deploy. -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Your Name" />
-    <meta property="og:title" content="Your Name - Your Title" />
-    <meta property="og:description" content="PLACEHOLDER - one sentence on what you do and who you do it for." />
-    <!-- <meta property="og:url" content="https://yoursite.com/" /> -->
-    <!-- <meta property="og:image" content="https://yoursite.com/share.png" /> -->
+    <meta property="og:site_name" content="Dennis Leal Portfolio" />
+    <meta property="og:title" content="Dennis Leal — IEX Administrator | WFM Support" />
+    <meta
+      property="og:description"
+      content="Contact-center workforce management, NICE IEX support, real-time operations, and technical troubleshooting."
+    />
+    <meta property="og:url" content="https://dennisleal.github.io/Portfolio/" />
+    <meta property="og:image" content="https://dennisleal.github.io/Portfolio/ProfilePhoto.png" />
+    <meta property="og:image:alt" content="Dennis Leal portrait" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Theme before first paint: no flash of the wrong palette. Default is
          light; dark is the visitor's opt-in, persisted in localStorage. -->
     <script>
-      (function () {
+      ;(function () {
         try {
           document.documentElement.dataset.theme =
-            localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+            localStorage.getItem('theme') === 'dark' ? 'dark' : 'light'
         } catch (e) {
-          document.documentElement.dataset.theme = 'light';
+          document.documentElement.dataset.theme = 'light'
         }
         if (document.documentElement.dataset.theme === 'dark') {
-          var bar = document.querySelector('meta[name="theme-color"]');
-          if (bar) bar.setAttribute('content', '#070B14');
+          var bar = document.querySelector('meta[name="theme-color"]')
+          if (bar) bar.setAttribute('content', '#070B14')
         }
-      })();
+      })()
     </script>
   </head>
   <body>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
-import { SealCheck, CaretRight, Play, Stack, Coffee } from '@/components/slab'
+import { SealCheck, CaretRight, Quotes, Stack } from '@/components/slab'
 import { profile } from '@/data/profile'
+import { siteContent } from '@/data/siteContent'
 import QuickMenu from './QuickMenu'
 
 /**
@@ -11,7 +12,7 @@ import QuickMenu from './QuickMenu'
  *   HomeStats    three proof facts (profile.stats), each named by a glyph so
  *                it reads at a glance
  *   HomeExplore  one shelf card per rail view in a snap row, then the first
- *                testimonial as a video stage
+ *                LinkedIn recommendation
  */
 
 export function HomeProfile() {
@@ -21,7 +22,12 @@ export function HomeProfile() {
       <div className="hprofile__who">
         <span className="hprofile__name">
           {profile.name}
-          <SealCheck size={16} weight="fill" className="hprofile__verified" aria-label={profile.verifiedLabel} />
+          <SealCheck
+            size={16}
+            weight="fill"
+            className="hprofile__verified"
+            aria-label={profile.verifiedLabel}
+          />
         </span>
         <span className="hprofile__handle">
           {profile.handle} · {profile.role}
@@ -47,14 +53,51 @@ export function HomeStats() {
 }
 
 const TILES = [
-  { n: '01', label: 'Projects', to: '/projects', title: 'PLACEHOLDER - projects headline', desc: 'Tell me what to put here.', img: '/placeholders/project-1.jpg' },
-  { n: '02', label: 'Services', to: '/services', title: 'PLACEHOLDER - services headline', desc: 'Tell me what to put here.', Icon: Stack },
-  { n: '03', label: 'Showcase', to: '/showcase', title: 'PLACEHOLDER - your flagship', desc: 'Tell me what to put here.', Icon: Coffee, accent: true },
-  { n: '04', label: 'Testimonials', to: '/testimonials', title: 'PLACEHOLDER - testimonials headline', desc: 'Tell me what to put here.', img: '/placeholders/testimonial-1.jpg' },
-  { n: '05', label: 'About', to: '/about', title: `Hi, I'm ${profile.firstName}.`, desc: 'PLACEHOLDER - one line about you.', img: profile.avatarSrc },
+  {
+    n: '01',
+    label: 'Projects',
+    to: '/projects',
+    title: 'WFM work & software projects',
+    desc: 'Excel workflows, Kcal Log, and WinSentinel.',
+    img: siteContent.projects.find((project) => project.id === 'kcal-log')?.imageSrc,
+  },
+  {
+    n: '02',
+    label: 'Support areas',
+    to: '/services',
+    title: 'NICE IEX & WFM support',
+    desc: 'Troubleshooting, real-time operations, and Excel.',
+    Icon: Stack,
+  },
+  {
+    n: '03',
+    label: 'Testimonials',
+    to: '/testimonials',
+    title: 'Recommendations from colleagues',
+    desc: 'Two LinkedIn recommendations.',
+    Icon: Quotes,
+  },
+  {
+    n: '04',
+    label: 'Software projects',
+    to: '/projects',
+    title: 'Kcal Log & WinSentinel',
+    desc: 'A calorie-logging PWA and a simulated security prototype.',
+    img: siteContent.projects.find((project) => project.id === 'winsentinel')?.imageSrc,
+  },
+  {
+    n: '05',
+    label: 'About',
+    to: '/about',
+    title: `Hi, I'm ${profile.firstName}.`,
+    desc: 'IEX Administrator with 10+ years in contact-center WFM.',
+    img: profile.avatarSrc,
+  },
 ] as const
 
 export function HomeExplore() {
+  const recommendation = siteContent.testimonials[0]
+
   return (
     <>
       <div className="hsec">
@@ -62,15 +105,21 @@ export function HomeExplore() {
       </div>
       <ul className="htiles" role="list">
         {TILES.map((t) => (
-          <li key={t.to}>
+          <li key={`${t.n}-${t.to}`}>
             <Link to={t.to} className={`htile${'accent' in t && t.accent ? ' htile--accent' : ''}`}>
               {'img' in t ? (
-                <span className="htile__media"><img className="htile__img" src={t.img} alt="" loading="lazy" /></span>
+                <span className="htile__media">
+                  <img className="htile__img" src={t.img} alt="" loading="lazy" />
+                </span>
               ) : (
-                <span className="htile__media htile__glyph"><t.Icon size={52} weight="duotone" aria-hidden="true" /></span>
+                <span className="htile__media htile__glyph">
+                  <t.Icon size={52} weight="duotone" aria-hidden="true" />
+                </span>
               )}
               <span className="htile__body">
-                <span className="htile__n">{t.n} {t.label}</span>
+                <span className="htile__n">
+                  {t.n} {t.label}
+                </span>
                 <span className="htile__title">{t.title}</span>
                 <span className="htile__desc">{t.desc}</span>
               </span>
@@ -83,20 +132,24 @@ export function HomeExplore() {
       <div className="hsec">
         <h2 className="hsec__title">
           <Link to="/testimonials" className="hsec__link">
-            What clients say
+            What colleagues say
             <CaretRight size={16} weight="bold" aria-hidden="true" />
           </Link>
         </h2>
       </div>
-      <Link to="/testimonials" className="hproof" aria-label="Client testimonial. PLACEHOLDER - a one-line teaser for your best testimonial.">
-        <span className="hproof__stage">
-          <img src="/placeholders/testimonial-1.jpg" alt="" loading="lazy" />
-          <span className="hproof__play" aria-hidden="true"><Play size={20} weight="fill" /></span>
-          <span className="hproof__dur" aria-hidden="true">0:00</span>
+      <Link
+        to="/testimonials"
+        className="hproof"
+        aria-label={`Read ${recommendation.name}'s LinkedIn recommendation`}
+      >
+        <span className="hproof__stage hproof__stage--quote" aria-hidden="true">
+          <Quotes size={36} weight="fill" />
         </span>
         <span className="hproof__copy">
-          <span className="hproof__title">PLACEHOLDER - tell me what to put here: a one-line teaser for your best testimonial.</span>
-          <span className="hproof__meta">PLACEHOLDER - client role</span>
+          <span className="hproof__title">“{recommendation.quote}”</span>
+          <span className="hproof__meta">
+            {recommendation.name} · {recommendation.role}
+          </span>
         </span>
       </Link>
     </>

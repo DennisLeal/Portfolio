@@ -3,8 +3,7 @@ import { useMemo } from 'react'
 /**
  * ToolsMarquee
  *
- * Horizontally scrolling strip of brand logos + labels for the tools you work with.
- * PLACEHOLDER - swap the list below for your own tools (icons live in public/icons/).
+ * Horizontally scrolling strip of tools and platforms from the supplied profile.
  * The strip lives on the cream shader page, NOT inside a dark section.
  *
  * Implementation notes:
@@ -32,23 +31,22 @@ import { useMemo } from 'react'
 
 type Tool = {
   name: string
-  iconPath: string
-  /** When set, the SVG silhouette is tinted via CSS mask. Omit for multi-color marks. */
-  color?: string
+  iconPath?: string
+  mark?: string
 }
 
+const ICONS = `${import.meta.env.BASE_URL}icons/`
+
 export const tools: Tool[] = [
-  { name: 'Claude Code',          iconPath: '/icons/claude-code-logo.png' },
-  { name: 'Codex',                iconPath: '/icons/codex.svg',           color: '#000000' },
-  { name: 'Cursor',               iconPath: '/icons/cursor.svg',          color: '#0F172A' },
-  { name: 'Hermes AI',            iconPath: '/icons/nousresearch.svg',    color: '#18181B' },
-  { name: 'VS Code',              iconPath: '/icons/vscode.svg' },
-  { name: 'GoHighLevel',          iconPath: '/icons/gohighlevel.png' },
-  { name: 'Lightspeed X-Series',  iconPath: '/icons/lightspeed.png' },
-  { name: 'Google Workspace',     iconPath: '/icons/googleworkspace.svg' },
-  { name: 'Zendesk',              iconPath: '/icons/zendesk.svg',         color: '#03363D' },
-  { name: 'Intercom',             iconPath: '/icons/intercom.svg',        color: '#1F8DED' },
-  { name: 'Slack',                iconPath: '/icons/slack.svg',           color: '#611F69' },
+  { name: 'NICE IEX', mark: 'IEX' },
+  { name: 'Agent & Supervisor WebStation', mark: 'WS' },
+  { name: 'RCP', mark: 'RCP' },
+  { name: 'Microsoft Excel', mark: 'XLS' },
+  { name: 'VBA / Macros', mark: 'VBA' },
+  { name: 'Microsoft Teams', mark: 'T' },
+  { name: 'GitHub', iconPath: `${ICONS}ai/github.svg` },
+  { name: 'VS Code', iconPath: `${ICONS}vscode.svg` },
+  { name: 'AI-assisted development', mark: 'AI' },
 ]
 
 export default function ToolsMarquee() {
@@ -59,39 +57,32 @@ export default function ToolsMarquee() {
   return (
     <section className="tools-marquee" aria-label="Tools I work with" data-reveal>
       <div className="tools-marquee__track" aria-hidden="true">
-        {doubled.map((tool, i) => {
-          const useMask = tool.iconPath.endsWith('.svg') && !!tool.color
-          return (
-            <div key={`${tool.name}-${i}`} className="tools-marquee__item">
-              {/* A plain box on desktop (display: contents); on phones it is
+        {doubled.map((tool, i) => (
+          <div key={`${tool.name}-${i}`} className="tools-marquee__item">
+            {/* A plain box on desktop (display: contents); on phones it is
                   the rounded app-icon tile - a masked icon cannot carry its
                   own background, so the tile needs its own element. */}
-              <span className="tools-marquee__tile">
-                {useMask ? (
-                  <span
-                    className="tools-marquee__icon"
-                    style={{
-                      ['--icon-url' as string]: `url('${tool.iconPath}')`,
-                      ['--brand-color' as string]: tool.color ?? 'var(--navy)',
-                    }}
-                  />
-                ) : (
-                  <img
-                    className="tools-marquee__img"
-                    src={tool.iconPath}
-                    alt=""
-                    aria-hidden="true"
-                    loading="lazy"
-                    decoding="async"
-                    width={20}
-                    height={20}
-                  />
-                )}
-              </span>
-              <span className="tools-marquee__label">{tool.name}</span>
-            </div>
-          )
-        })}
+            <span className="tools-marquee__tile">
+              {tool.iconPath ? (
+                <img
+                  className="tools-marquee__img"
+                  src={tool.iconPath}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
+                  width={20}
+                  height={20}
+                />
+              ) : (
+                <span className="tools-marquee__mark" aria-hidden="true">
+                  {tool.mark}
+                </span>
+              )}
+            </span>
+            <span className="tools-marquee__label">{tool.name}</span>
+          </div>
+        ))}
       </div>
 
       {/* Real semantic list for screen readers, dedupes the visual loop. */}

@@ -1,5 +1,5 @@
-import type { CSSProperties } from 'react'
-import { ArrowUpRight, MapPin } from '@/components/slab'
+import { ArrowUpRight, Article, Database, MapPin, PhoneCall, Timer } from '@/components/slab'
+import type { Icon } from '@/components/slab'
 import { profile } from '@/data/profile'
 import { siteContent } from '@/data/siteContent'
 
@@ -9,37 +9,33 @@ import { siteContent } from '@/data/siteContent'
  */
 
 const ICONS = `${import.meta.env.BASE_URL}icons/`
-const GITHUB = { src: `${ICONS}ai/github.svg`, name: 'GitHub' }
-const CLAUDE = { src: `${ICONS}ai/claude-color.svg`, name: 'Claude' }
-const OPENAI = { src: `${ICONS}openai.svg`, name: 'OpenAI' }
-const VSCODE = { src: `${ICONS}vscode.svg`, name: 'VS Code' }
 
 type Capability = {
   index: string
   title: string
-  marks: { src: string; name: string }[]
+  Icon: Icon
 }
 
 const CAPABILITIES: Capability[] = [
   {
     index: '01',
-    title: 'WFM Administration',
-    marks: [GITHUB, VSCODE],
+    title: 'NICE IEX Troubleshooting',
+    Icon: Database,
   },
   {
     index: '02',
-    title: 'Real-Time Monitoring',
-    marks: [GITHUB, VSCODE],
+    title: 'WebStation, RCP & Access Support',
+    Icon: PhoneCall,
   },
   {
     index: '03',
-    title: 'AI Application Dev',
-    marks: [CLAUDE, OPENAI, GITHUB],
+    title: 'Real-Time WFM Operations',
+    Icon: Timer,
   },
   {
     index: '04',
-    title: 'Systems Troubleshooting',
-    marks: [VSCODE, GITHUB],
+    title: 'Excel Reporting & VBA',
+    Icon: Article,
   },
 ]
 
@@ -52,36 +48,67 @@ export default function AboutGrid() {
           {`Hi, I’m ${profile.firstName}.`}
         </h1>
         <p className="pgrid__lede">
-          Workforce management systems specialist & AI-assisted app builder.
+          IEX Administrator | Workforce Management | Real-Time Operations | Technical
+          Troubleshooting
         </p>
       </header>
 
       <div className="home__glass agrid__glass">
         <div className="agrid__copy">
-          <p className="agrid__lead" style={{ fontSize: '1.25rem', lineHeight: '1.6', marginBottom: '1.5rem' }}>
+          <p
+            className="agrid__lead"
+            style={{ fontSize: '1.25rem', lineHeight: '1.6', marginBottom: '1.5rem' }}
+          >
             {siteContent.hero.about}
           </p>
 
-          <div className="agrid__note" style={{ marginBottom: '2rem' }}>
-            <p style={{ opacity: 0.8, lineHeight: '1.6' }}>
-              I focus on the critical infrastructure of the contact center, ensuring that
-              the systems a global WFM team depends on are configured correctly and running without delay.
-            </p>
+          <div className="agrid__note">
+            <h2 className="agrid__section-title">Experience & education</h2>
+            <ul className="agrid__history" role="list">
+              {siteContent.careerPath.map((position) => (
+                <li key={`${position.employer}-${position.role}`}>
+                  <strong>{position.role}</strong>
+                  <span>
+                    {position.employer} · {position.period}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <ul className="agrid__history agrid__history--education" role="list">
+              {siteContent.education.map((item) => (
+                <li key={item.name}>
+                  <strong>{item.name}</strong>
+                  <span>
+                    {item.institution}
+                    {'year' in item && ` · ${item.year}`}
+                    {'detail' in item && ` · ${item.detail}`}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
+
+          <section className="agrid__metrics" aria-labelledby="resume-metrics-title">
+            <h2 className="agrid__section-title" id="resume-metrics-title">
+              Selected résumé figures
+            </h2>
+            <ul className="agrid__metrics-list" role="list">
+              {siteContent.resumeMetrics.map((metric) => (
+                <li className="agrid__metric" key={metric.label}>
+                  <strong>{metric.value}</strong>
+                  <span>{metric.label}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
 
           <ul className="agrid__caps" role="list">
             {CAPABILITIES.map((c) => (
-              <li key={c.index} className="agrid__cap" style={{ marginBottom: '1rem' }}>
-                <span className="agrid__cap-marks">
-                  {c.marks.map((m, i) => (
-                    <span
-                      key={m.name}
-                      className="agrid__mark"
-                      style={{ '--i': c.marks.length - i } as CSSProperties}
-                    >
-                      <img src={m.src} alt={m.name} loading="lazy" decoding="async" />
-                    </span>
-                  ))}
+              <li key={c.index} className="agrid__cap">
+                <span className="agrid__cap-marks" aria-hidden="true">
+                  <span className="agrid__mark">
+                    <c.Icon size={20} weight="duotone" />
+                  </span>
                 </span>
                 <span className="agrid__cap-title">{c.title}</span>
                 <span className="agrid__cap-index" aria-hidden="true">
@@ -112,13 +139,34 @@ export default function AboutGrid() {
               </span>
             </span>
 
-            <a className="agrid__cell agrid__cell--wide" href={profile.socials[0].href} target="_blank" rel="noopener noreferrer">
+            <a
+              className="agrid__cell agrid__cell--wide"
+              href={profile.socials[0].href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <span className="agrid__cell-mark agrid__cell-mark--plain">
                 <img src={`${ICONS}linkedin.svg`} alt="LinkedIn" loading="lazy" decoding="async" />
               </span>
               <span className="agrid__cell-copy">
                 <span className="agrid__cell-title">LinkedIn Profile</span>
                 <span className="agrid__cell-meta">Connect with me</span>
+              </span>
+              <ArrowUpRight className="agrid__cell-go" size={15} weight="bold" aria-hidden="true" />
+            </a>
+
+            <a
+              className="agrid__cell agrid__cell--wide"
+              href={profile.socials[1].href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="agrid__cell-mark agrid__cell-mark--plain">
+                <img src={profile.socials[1].iconPath} alt="" loading="lazy" decoding="async" />
+              </span>
+              <span className="agrid__cell-copy">
+                <span className="agrid__cell-title">GitHub Profile</span>
+                <span className="agrid__cell-meta">Public projects and source code</span>
               </span>
               <ArrowUpRight className="agrid__cell-go" size={15} weight="bold" aria-hidden="true" />
             </a>

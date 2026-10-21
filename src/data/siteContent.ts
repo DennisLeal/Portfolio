@@ -5,67 +5,113 @@
  * When you change a value here, it will update everywhere automatically.
  */
 
+export type PortfolioProject = {
+  id: string
+  category: 'wfm' | 'apps' | 'ai'
+  categoryLabel: string
+  name: string
+  oneLiner: string
+  features: string[]
+  previewItems: string[]
+  imageSrc?: string
+  imageAlt?: string
+  status: string
+  links: {
+    live?: string
+    source?: string
+    additionalSource?: string
+  }
+}
+
 export const siteContent = {
   hero: {
-    headline: 'Workforce management systems specialist & AI-assisted app builder',
-    about: '10+ years in Philippine contact centers. I started in client support, moved into real-time analysis and real-time monitoring supervision, and now administer the systems a global WFM team depends on: building and maintaining configuration, fixing issues fast, and keeping work from being delayed. I also build and ship apps with AI-assisted coding through Zelven Labs.',
-    location: 'Philippines',
+    headline:
+      'IEX Administrator | Workforce Management | Real-Time Operations | Technical Troubleshooting',
+    about:
+      'I am a Workforce Management professional with 10+ years of contact-center experience across Real-Time Analysis, WFM supervision, and NICE IEX administration and support. I investigate IEX, WebStation, RCP, access, upload, configuration, and data issues by checking symptoms and validating relevant settings and records, then document findings and coordinate the appropriate fix or escalation.',
+    location: 'Talisay, Negros Occidental, Philippines',
     contact: {
       email: 'lealdennis110@gmail.com',
       linkedin: 'https://linkedin.com/in/dennis-l-0b52695b',
-      github: 'https://github.com/Papsitv',
+      github: 'https://github.com/DennisLeal',
     },
-    availability: 'Open to remote WFM support and small app builds',
   },
 
   services: [
     {
-      title: 'WFM System Administration',
-      description: 'Building and maintaining what a workforce management system runs on - management units, contact types, queues, skills and distribution rules.',
+      title: 'NICE IEX Administration & Troubleshooting',
+      description:
+        'Investigate configuration, upload, forecast, AHT/intraday data, access, and unexpected-behavior issues in NICE IEX; validate findings and coordinate resolution or escalation.',
     },
     {
-      title: 'New Program Setup',
-      description: 'Standing up every entity for a new line of business from scratch, so data flows correctly from the phone system and calls route to the right program.',
+      title: 'WebStation, RCP & User Access Support',
+      description:
+        'Troubleshoot Agent and Supervisor WebStation display issues, RCP problems, login and user-access concerns, and coordinate with internal or vendor support when needed.',
     },
     {
-      title: 'Global WFM Support',
-      description: 'Fast diagnosis of login, MFA/SSO and application errors for WFM teams across regions, including why an upload or report fails, so work isn\'t delayed.',
+      title: 'WFM Configuration & Data Validation',
+      description:
+        'Validate IEX-related configuration and supporting data to isolate mismatches, investigate upload or schedule-processing issues, and prepare clear escalation findings.',
     },
     {
-      title: 'Real-Time Monitoring Support',
-      description: 'Hands-on experience as a Real-Time Analyst and monitoring supervisor - watching live contact center activity and escalating issues early.',
+      title: 'Real-Time WFM Operations',
+      description:
+        'Experience monitoring intraday staffing, adherence, service-level indicators, agent activity, and operational exceptions, with coordination across WFM and Operations.',
     },
     {
-      title: 'Migration & Rollout Support',
-      description: 'Broadcast communications, user guides, stakeholder meetings and vendor escalation during a global platform migration.',
+      title: 'Excel Reporting & Workflow Automation',
+      description:
+        'Build and refine Excel trackers, reporting workflows, validation, dashboards, formulas, PivotTables, and VBA/macros for WFM administration and operational tracking.',
     },
     {
-      title: 'AI-Assisted App Building (Zelven Labs)',
-      description: 'Web apps, installable PWAs and Android apps, including PH payment checkout (PayMongo) and automated delivery.',
+      title: 'Incident Documentation & Stakeholder Support',
+      description:
+        'Record symptoms, investigation steps, findings, workarounds, and corrective actions; communicate impact and status with WFM, Operations, technical teams, and vendors.',
     },
   ],
 
   careerPath: [
     {
-      role: 'WFM Systems Administrator',
+      role: 'IEX Administrator — WFM Support / Technical Troubleshooting',
       employer: 'iQor Philippines',
-      period: '2022 - Present',
+      period: 'April 2022 – Present',
     },
     {
-      role: 'Workforce Supervisor, Real-Time Monitoring',
+      role: 'Workforce Management Supervisor / Real-Time Operations',
       employer: 'iQor Philippines',
-      period: '2016 - 2022',
+      period: 'April 2016 – April 2022',
     },
     {
       role: 'Real-Time Analyst',
       employer: 'iQor Philippines',
-      period: '2014 - 2016',
+      period: 'September 2014 – April 2016',
     },
     {
-      role: 'Client Support Analyst',
+      role: 'Client Support Analyst / Mobile RTA',
       employer: 'Concur Technologies, Inc.',
-      period: '2013 - 2014',
+      period: 'June 2013 – August 2014',
     },
+  ],
+
+  education: [
+    {
+      name: 'Information & Technology',
+      institution: 'Systems Technology Institute (STI), Ormoc',
+      year: '2005',
+    },
+    {
+      name: 'Computer Hardware Servicing NC II',
+      institution: 'TESDA',
+      detail: '40 hours',
+    },
+  ],
+
+  resumeMetrics: [
+    { value: '100+', label: 'NICE technical issues resolved' },
+    { value: '95%+', label: 'first-contact resolution for NICE product issues' },
+    { value: '30%', label: 'fewer administrative errors after process improvements' },
+    { value: '500+', label: 'agents supported in WFM supervision' },
+    { value: '25%', label: 'forecast-accuracy improvement from recommendations' },
   ],
 
   certifications: [
@@ -91,43 +137,111 @@ export const siteContent = {
 
   projects: [
     {
-      id: 'kcal-log',
-      name: 'Kcal Log',
-      oneLiner: 'A simple calorie tracker that installs like a native app.',
-      problem: 'Tracking nutrition is often tedious and cumbersome with complex apps. I wanted a streamlined way to log calories that felt like a native part of the phone.',
+      id: 'wfm-class-tracking',
+      category: 'wfm',
+      categoryLabel: 'WFM · Excel',
+      name: 'WFM Class & Scenario Tracking',
+      oneLiner:
+        'An Excel workflow built around SPTR and Class Summary sheets for repeatable WFM training records.',
       features: [
-        'Daily / weekly / monthly summary with a day-by-day ledger',
-        'Food-pattern breakdown by weekday',
-        'First-launch guide',
-        'Installs like a native app: PWA + signed Android APK',
-        '7-day free trial, then ₱79 one-time unlock',
+        'Uses structured scoring fields and validation.',
+        'Includes a record/clear process for repeatable scenario documentation.',
       ],
-      builtWith: 'HTML/JavaScript PWA on GitHub Pages, PWABuilder (Android APK), PayMongo checkout, Make.com automation for post-payment delivery',
-      status: 'Live',
+      previewItems: ['SPTR', 'Class Summary', 'Scoring', 'Record / Clear'],
+      status: 'Practical WFM work',
+      links: {},
+    },
+    {
+      id: 'wfm-reporting',
+      category: 'wfm',
+      categoryLabel: 'WFM · Excel',
+      name: 'WFM Reporting & Excel Automation',
+      oneLiner:
+        'Excel trackers, dashboards, lookup-driven reporting, and automation concepts for real-time and operational workflows.',
+      features: [
+        'Uses formulas, PivotTables, validation, and conditional formatting.',
+        'Includes practical Excel and VBA/macros work for WFM tracking and administration.',
+      ],
+      previewItems: ['Excel trackers', 'Dashboards', 'PivotTables', 'VBA / macros'],
+      status: 'Practical WFM work',
+      links: {},
+    },
+    {
+      id: 'kcal-log',
+      category: 'apps',
+      categoryLabel: 'Personal project · PWA',
+      name: 'Kcal Log',
+      oneLiner:
+        'A personal calorie logging PWA with meal entries, Filipino foods, and daily, weekly, and monthly summaries.',
+      features: [
+        'Log a food or item with calories, time, and optional notes.',
+        'Browse a foods list that includes Filipino dishes and portion amounts.',
+        'Set a personal target and review daily, weekly, or monthly totals.',
+      ],
+      previewItems: [],
+      imageSrc: `${import.meta.env.BASE_URL}projects/kcal-log.png`,
+      imageAlt: 'Kcal Log meal-entry screen from the supplied project carousel',
+      status: 'Live PWA',
       links: {
-        live: 'https://papsitv.github.io/kcal-log/',
-        source: 'https://github.com/Papsitv/kcal-log',
+        live: 'https://dennisleal.github.io/kcal-log/',
+        source: 'https://github.com/DennisLeal/kcal-log',
+        additionalSource: 'https://github.com/DennisLeal/kcal-log-app',
+      },
+    },
+    {
+      id: 'winsentinel',
+      category: 'ai',
+      categoryLabel: 'Personal project · Prototype',
+      name: 'WinSentinel',
+      oneLiner:
+        'A browser prototype for exploring Windows security signals through selectable scenarios and a 3D dashboard.',
+      features: [
+        'The public demo uses simulated signals; it is not a live threat monitor.',
+        'Includes a verdict view, scenario controls, signal feed, and security suggestions.',
+        'The public repository documents separate read-only local Windows observations and their limitations.',
+      ],
+      previewItems: [],
+      imageSrc: `${import.meta.env.BASE_URL}projects/winsentinel.png`,
+      imageAlt: 'WinSentinel simulated security dashboard from the supplied project carousel',
+      status: 'Prototype · demo signals are simulated',
+      links: {
+        live: 'https://DennisLeal.github.io/WinSentinel/',
+        source: 'https://github.com/DennisLeal/WinSentinel',
       },
     },
     {
       id: 'zelven-labs',
+      category: 'ai',
+      categoryLabel: 'AI-assisted initiative',
       name: 'Zelven Labs',
-      oneLiner: 'My AI-assisted software studio. I direct AI coding agents to design, build and ship products end to end.',
-      problem: 'Traditional software development can be slow and expensive for solo founders. I use AI agents to accelerate the design and build process.',
+      oneLiner:
+        'An AI-assisted coding initiative focused on turning product ideas into working software through plain-language direction and iterative testing.',
       features: [
-        'Rapid prototyping using AI coding agents',
-        'End-to-end product lifecycle management',
-        'Deployment of functional PWAs and apps',
-        'Integration of local payment gateways',
+        'Uses AI development agents and GitHub-based workflows.',
+        'Focuses on directing, testing, and refining software ideas through iteration.',
       ],
-      builtWith: 'AI Development Agents, Modern Web Frameworks, GitHub Pages',
-      status: 'Active',
+      previewItems: ['Product ideas', 'Plain-language direction', 'AI agents', 'Iterative testing'],
+      status: 'Initiative',
+      links: {},
+    },
+    {
+      id: 'wfm-portfolio',
+      category: 'wfm',
+      categoryLabel: 'Public GitHub repository',
+      name: 'Workforce Management Portfolio',
+      oneLiner:
+        'A public HTML portfolio repository presenting my workforce management background and résumé.',
+      features: [
+        'The repository includes a WFM portfolio page and résumé files.',
+        'Its README summarizes forecasting, scheduling, real-time monitoring, and Excel-based WFM work.',
+      ],
+      previewItems: ['WFM background', 'Real-time operations', 'Excel'],
+      status: 'Public repository',
       links: {
-        live: '#',
-        source: '#',
+        source: 'https://github.com/DennisLeal/workforce-management-portfolio',
       },
     },
-  ],
+  ] as PortfolioProject[],
 
   testimonials: [
     {

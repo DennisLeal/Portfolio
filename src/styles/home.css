@@ -97,12 +97,12 @@
 .home .tools-marquee__track { gap: 44px; padding: 14px 28px; }
 .home .tools-marquee__item { gap: 10px; padding-right: 44px; font-size: 13.5px; }
 .home .tools-marquee__item::after { height: 16px; }
-.home .tools-marquee__icon, .home .tools-marquee__img { width: 20px; height: 20px; }
+.home .tools-marquee__icon, .home .tools-marquee__img, .home .tools-marquee__mark { width: 20px; height: 20px; }
 /* Phones: the 44px gaps left two logos on screen. Pack the strip. */
 @media (max-width: 640px) {
   .home .tools-marquee__track { gap: 22px; padding: 10px 14px; }
   .home .tools-marquee__item { gap: 8px; padding-right: 22px; font-size: 12px; }
-  .home .tools-marquee__icon, .home .tools-marquee__img { width: 18px; height: 18px; }
+  .home .tools-marquee__icon, .home .tools-marquee__img, .home .tools-marquee__mark { width: 18px; height: 18px; }
   .home__glass { padding: 12px; border-radius: var(--radius-card); gap: 12px; }
   .home__tools { gap: 8px; }
 }

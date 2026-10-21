@@ -1,8 +1,23 @@
 import { useState, type FormEvent } from 'react'
-import { PaperPlaneTilt, CheckCircle, WarningCircle, EnvelopeSimple, ArrowUpRight, CaretDown } from '@/components/slab'
+import {
+  PaperPlaneTilt,
+  CheckCircle,
+  WarningCircle,
+  EnvelopeSimple,
+  ArrowUpRight,
+  CaretDown,
+} from '@/components/slab'
 import { FAQS } from '@/data/faqs'
 import { profile } from '@/data/profile'
-import { readLead, submitLead, SubmitError, MAX_NAME, MAX_EMAIL, MAX_MESSAGE, type SubmitResult } from '@/lib/contact'
+import {
+  readLead,
+  submitLead,
+  SubmitError,
+  MAX_NAME,
+  MAX_EMAIL,
+  MAX_MESSAGE,
+  type SubmitResult,
+} from '@/lib/contact'
 
 /**
  * ContactGrid - the Contact view as a fixed viewport.
@@ -17,7 +32,11 @@ import { readLead, submitLead, SubmitError, MAX_NAME, MAX_EMAIL, MAX_MESSAGE, ty
  * client with the message laid out, and the success copy says so.
  */
 
-type Status = { kind: 'idle' } | { kind: 'sending' } | { kind: 'error'; note: string } | { kind: 'sent'; via: SubmitResult['via'] }
+type Status =
+  | { kind: 'idle' }
+  | { kind: 'sending' }
+  | { kind: 'error'; note: string }
+  | { kind: 'sent'; via: SubmitResult['via'] }
 
 /* The plane takes this long to leave the button. The sent state waits for it
    even when the submit itself is instant, so the send is something you see
@@ -47,7 +66,10 @@ export default function ContactGrid() {
       const [result] = await Promise.all([submitLead(lead), wait(FLIGHT_MS)])
       setStatus({ kind: 'sent', via: result.via })
     } catch (err) {
-      const note = err instanceof SubmitError ? err.message : 'That did not go through. Email me directly instead.'
+      const note =
+        err instanceof SubmitError
+          ? err.message
+          : 'That did not go through. Email me directly instead.'
       setStatus({ kind: 'error', note })
       setShake((n) => n + 1)
     }
@@ -60,10 +82,11 @@ export default function ContactGrid() {
       <header className="pgrid__head">
         <span className="pgrid__eyebrow">FAQs / Contact</span>
         <h1 className="pgrid__title" id="contact-title">
-          Your contact headline goes here.
+          Contact Dennis
         </h1>
         <p className="pgrid__lede">
-          PLACEHOLDER - tell me what to put here: one or two lines inviting people to write and saying what they get back.
+          Use the form or email me about my WFM experience, NICE IEX support, Excel workflows, or
+          software projects.
         </p>
       </header>
 
@@ -91,9 +114,16 @@ export default function ContactGrid() {
                     aria-expanded={isOpen}
                     aria-controls={`cfaq-${i}`}
                   >
-                    <span className="cgrid__step-index" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="cgrid__step-index" aria-hidden="true">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
                     <span className="cgrid__faq-text">{f.q}</span>
-                    <CaretDown size={14} weight="bold" className="cgrid__faq-caret" aria-hidden="true" />
+                    <CaretDown
+                      size={14}
+                      weight="bold"
+                      className="cgrid__faq-caret"
+                      aria-hidden="true"
+                    />
                   </button>
                   <div className="cgrid__faq-a" id={`cfaq-${i}`} hidden={!isOpen}>
                     <p>{f.a}</p>
@@ -111,7 +141,13 @@ export default function ContactGrid() {
             <ul className="cgrid__socials" role="list">
               {profile.socials.map((s) => (
                 <li key={s.label}>
-                  <a className="cgrid__social" href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+                  <a
+                    className="cgrid__social"
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                  >
                     <img src={s.iconPath} alt="" loading="lazy" decoding="async" />
                   </a>
                 </li>
@@ -132,15 +168,23 @@ export default function ContactGrid() {
               </h2>
               <p className="cgrid__done-body">
                 {status.via === 'webhook'
-                  ? 'It is in my inbox and on my phone. You will hear back within one business day.'
-                  : 'The message is laid out and addressed. Press send there and you will hear back within one business day.'}
+                  ? 'Your message was submitted successfully.'
+                  : 'Your email app is ready with the message. Send it there to complete delivery.'}
               </p>
-              <button type="button" className="cgrid__again" onClick={() => setStatus({ kind: 'idle' })}>
+              <button
+                type="button"
+                className="cgrid__again"
+                onClick={() => setStatus({ kind: 'idle' })}
+              >
                 Write another
               </button>
             </div>
           ) : (
-            <form className={`cgrid__form${busy ? ' is-sending' : ''}`} onSubmit={onSubmit} noValidate>
+            <form
+              className={`cgrid__form${busy ? ' is-sending' : ''}`}
+              onSubmit={onSubmit}
+              noValidate
+            >
               {/* Honeypot. Hidden from people and assistive tech; a script that
                   fills every field trips it and the backend can drop the
                   post. autoComplete off so a browser never fills it either. */}
@@ -155,26 +199,47 @@ export default function ContactGrid() {
               <div className="cgrid__row">
                 <label className="cgrid__field">
                   <span className="cgrid__label">First name</span>
-                  <input type="text" name="firstName" autoComplete="given-name" required maxLength={MAX_NAME} placeholder="First name" />
+                  <input
+                    type="text"
+                    name="firstName"
+                    autoComplete="given-name"
+                    required
+                    maxLength={MAX_NAME}
+                    placeholder="First name"
+                  />
                 </label>
                 <label className="cgrid__field">
                   <span className="cgrid__label">Last name</span>
-                  <input type="text" name="lastName" autoComplete="family-name" required maxLength={MAX_NAME} placeholder="Last name" />
+                  <input
+                    type="text"
+                    name="lastName"
+                    autoComplete="family-name"
+                    required
+                    maxLength={MAX_NAME}
+                    placeholder="Last name"
+                  />
                 </label>
               </div>
 
               <label className="cgrid__field">
                 <span className="cgrid__label">Email</span>
-                <input type="email" name="email" autoComplete="email" required maxLength={MAX_EMAIL} placeholder="you@yourbusiness.com" />
+                <input
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  required
+                  maxLength={MAX_EMAIL}
+                  placeholder="your@email.com"
+                />
               </label>
 
               <label className="cgrid__field cgrid__field--grow">
-                <span className="cgrid__label">Tell me more about your business</span>
+                <span className="cgrid__label">Your message</span>
                 <textarea
                   name="message"
                   required
                   maxLength={MAX_MESSAGE}
-                  placeholder="What do you need help with? What are you working with today?"
+                  placeholder="What would you like to ask or discuss?"
                 />
               </label>
 
@@ -189,7 +254,12 @@ export default function ContactGrid() {
                     <PaperPlaneTilt size={17} weight="fill" />
                   </span>
                   <span className="cgrid__submit-label">{busy ? 'Sending' : 'Send message'}</span>
-                  <ArrowUpRight className="cgrid__submit-arrow" size={15} weight="bold" aria-hidden="true" />
+                  <ArrowUpRight
+                    className="cgrid__submit-arrow"
+                    size={15}
+                    weight="bold"
+                    aria-hidden="true"
+                  />
                 </button>
                 {status.kind === 'error' ? (
                   <span className="cgrid__status" role="alert">

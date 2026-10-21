@@ -75,8 +75,61 @@
 .pgrid__hint svg { color: var(--orange); }
 @media (min-width: 1100px) {
   .pgrid__glass { height: 100%; display: flex; }
-  .bento--projects { flex: 1 1 auto; height: 100%; }
-  .bento__card--wide { grid-column: span 2; }
+  .pgrid .bento--projects {
+    flex: 1 1 auto;
+    height: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+}
+.pgrid__project-card { min-height: 0; }
+.pgrid__project-card .bento__label { align-items: flex-start; }
+.pgrid__project-card .bento__title { padding-top: 2px; }
+.pgrid__project-category {
+  color: var(--orange-ink);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+.pgrid__project-media {
+  flex: 1 1 auto;
+  min-height: 74px;
+  max-height: clamp(90px, 13vh, 140px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--tint);
+}
+.pgrid__project-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.pgrid__project-preview {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: center;
+  gap: 7px;
+  padding: 12px;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--tint);
+}
+.pgrid__project-preview li {
+  min-width: 0;
+  padding: 6px 8px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .bento__card--btn {
   font: inherit;
@@ -294,6 +347,129 @@
 @keyframes pmodal-panel {
   from { transform: translateY(18px) scale(0.985); opacity: 0; }
   to   { transform: none; opacity: 1; }
+}
+
+/* Project details use the available dialog space without a simulated browser
+   frame, so the provided screenshots and repository links stay in context. */
+.pdetail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 48px);
+  width: min(1180px, 100%);
+  max-height: 100%;
+  min-width: 0;
+  margin: auto;
+  padding: clamp(22px, 4vw, 52px);
+  overflow: auto;
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
+  background: var(--paper);
+  color: var(--navy);
+  box-shadow: 0 32px 90px -40px rgba(0, 0, 0, 0.7);
+}
+.pdetail--image { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); }
+.pdetail__copy { min-width: 0; }
+.pdetail__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--orange-ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.pdetail__title {
+  margin: 12px 0 10px;
+  font-size: clamp(25px, 3vw, 42px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+.pdetail__summary {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(15px, 1.1vw, 18px);
+  line-height: 1.6;
+}
+.pdetail__status {
+  display: inline-flex;
+  margin: 14px 0 0;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+.pdetail__section-title {
+  margin: 24px 0 10px;
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 700;
+}
+.pdetail__features {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.pdetail__features li::marker { color: var(--orange); }
+.pdetail__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 24px;
+}
+.pdetail__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 0 13px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.pdetail__link:hover { border-color: var(--orange); color: var(--orange-ink); }
+.pdetail__link:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+.pdetail__figure {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  min-width: 0;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--tint);
+}
+.pdetail__figure img {
+  display: block;
+  width: 100%;
+  max-height: min(66vh, 620px);
+  object-fit: contain;
+  border-radius: 10px;
+}
+.pdetail__figure figcaption {
+  padding: 9px 4px 2px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+@media (max-width: 1099px) {
+  .pdetail--image { grid-template-columns: minmax(0, 1fr); }
+  .pdetail__figure img { max-height: min(44vh, 440px); }
+}
+@media (max-width: 560px) {
+  .pgrid__project-media { max-height: 140px; }
+  .pdetail { padding: 20px; }
 }
 
 /* ---------- Panels: the work, directly ---------- */

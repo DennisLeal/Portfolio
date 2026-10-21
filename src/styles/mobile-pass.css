@@ -128,7 +128,8 @@ html { -webkit-tap-highlight-color: transparent; }
       0 4px 10px -6px rgba(11, 30, 63, 0.35);
   }
   .home .tools-marquee__icon,
-  .home .tools-marquee__img { width: 26px; height: 26px; }
+  .home .tools-marquee__img,
+  .home .tools-marquee__mark { width: 26px; height: 26px; }
   .home .tools-marquee__label {
     max-width: 70px;
     overflow: hidden;

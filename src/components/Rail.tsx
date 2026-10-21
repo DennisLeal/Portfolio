@@ -2,15 +2,7 @@ import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { SealCheck } from '@/components/slab'
 import ThemeGlyph from './ThemeGlyph'
-import {
-  HomeIcon,
-  FolderIcon,
-  StackIcon,
-  CupIcon,
-  StarIcon,
-  UserIcon,
-  MessageIcon,
-} from './RailIcons'
+import { HomeIcon, FolderIcon, StackIcon, StarIcon, UserIcon, MessageIcon } from './RailIcons'
 import { getTheme, toggleTheme, type Theme } from '@/lib/theme'
 import { profile } from '@/data/profile'
 
@@ -29,10 +21,9 @@ export const RAIL_LINKS = [
   { label: 'Home', to: '/', Icon: HomeIcon },
   { label: 'Projects', to: '/projects', Icon: FolderIcon },
   { label: 'Services', to: '/services', Icon: StackIcon },
-  { label: 'Showcase', to: '/showcase', Icon: CupIcon },
   { label: 'Testimonials', to: '/testimonials', Icon: StarIcon },
   { label: 'About', to: '/about', Icon: UserIcon },
-  { label: 'FAQs / Contact', to: '/contact', Icon: MessageIcon },
+  { label: 'Contact', to: '/contact', Icon: MessageIcon },
 ] as const
 
 export default function Rail() {
@@ -46,41 +37,34 @@ export default function Rail() {
     <aside className="rail" aria-label="Profile and site navigation">
       <div className="rail__inner">
         <span className="rail__avatar">
-          <img
-            src={profile.avatarSrc}
-            alt={profile.name}
-            width={120}
-            height={120}
-          />
+          <img src={profile.avatarSrc} alt={profile.name} width={120} height={120} />
         </span>
 
         <h2 className="rail__name">
           {profile.name}
           <SealCheck size={19} weight="fill" aria-label={profile.verifiedLabel} />
         </h2>
-        <p className="rail__handle">
-          {profile.handle}
-        </p>
+        <p className="rail__handle">{profile.handle}</p>
 
         <div className="rail__actions">
           <ul className="rail__socials" role="list" aria-label="Social profiles">
-          {profile.socials.map(({ label, href, iconPath }) => (
-            <li key={label}>
-              <a
-                className="rail__social"
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={label}
-              >
-                {/* Single-colour silhouettes, tinted by currentColor through a
+            {profile.socials.map(({ label, href, iconPath }) => (
+              <li key={label}>
+                <a
+                  className="rail__social"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                >
+                  {/* Single-colour silhouettes, tinted by currentColor through a
                     CSS mask - same technique as the hero's social row. */}
-                <span
-                  className="rail__social-icon"
-                  style={{ ['--icon-url' as string]: `url('${iconPath}')` }}
-                  aria-hidden="true"
-                />
-              </a>
+                  <span
+                    className="rail__social-icon"
+                    style={{ ['--icon-url' as string]: `url('${iconPath}')` }}
+                    aria-hidden="true"
+                  />
+                </a>
               </li>
             ))}
           </ul>
