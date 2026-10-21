@@ -18,6 +18,7 @@ import {
 import { gymFunnel, bookingFunnel, websiteFunnel, type Funnel } from '@/data/funnels'
 import { aiStack, type StackNode } from '@/data/ai-stack'
 import { profile } from '@/data/profile'
+import { siteContent } from '@/data/siteContent'
 
 /**
  * Home's showcase: one card per rail view, each an index of what that view
@@ -42,14 +43,8 @@ const OFFERS = [
   { Icon: AppWindow, title: 'Service Five', note: 'PLACEHOLDER one-liner' },
 ] as const
 
-const CLIENTS = [
-  { name: 'Client Name 1', role: 'PLACEHOLDER - your role for them', work: 'Tag · Tag · Tag', logo: '/placeholders/logo.svg' },
-  { name: 'Client Name 2', role: 'PLACEHOLDER - your role for them', work: 'Tag · Tag · Tag', logo: '/placeholders/logo.svg' },
-  { name: 'Client Name 3', role: 'PLACEHOLDER - your role for them', work: 'Tag · Tag · Tag' },
-]
-
 // Three photos of you, fanned. Small copies are fine - the fan shows them under 100px.
-const PHOTOS = [profile.avatarSrc, '/avatar.svg?2', '/avatar.svg?3']
+const PHOTOS = [profile.avatarSrc, profile.avatarSrc, profile.avatarSrc]
 
 /** The AI systems as a flat list: every leaf of the Projects tree, in order. */
 const leaves = (n: StackNode): StackNode[] =>
@@ -104,7 +99,7 @@ export default function HomeBento() {
         <CardHead Icon={User} title="About" desc="PLACEHOLDER - one line about you." />
         <div className="bento__media bento__fan" aria-hidden="true">
           {PHOTOS.map((src, i) => (
-            <span key={src} className="bento__photo" style={{ ['--i' as string]: i }}>
+            <span key={`${src}-${i}`} className="bento__photo" style={{ ['--i' as string]: i }}>
               <img src={src} alt="" loading="lazy" decoding="async" />
             </span>
           ))}
@@ -131,16 +126,20 @@ export default function HomeBento() {
         </div>
       </Link>
 
-      {/* Credentials: the badge that matters, on its plate. */}
+      {/* A certificate preview links to the complete credential gallery. */}
       <Link to="/about" className="bento__card bento__card--creds">
-        <CardHead Icon={Medal} title="Credentials" desc="PLACEHOLDER - your main certification." />
+        <CardHead Icon={Medal} title="Credentials" desc="Three LinkedIn Learning certificates." />
         <div className="bento__media bento__badge" aria-hidden="true">
-          <span className="bento__badge-ring">
-            <img src="/placeholders/badge.svg" alt="" width={72} height={72} />
-          </span>
+          <img
+            className="bento__certificate-preview"
+            src={siteContent.certifications[0].imageSrc}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
           <span className="bento__badge-tag">
             <SealCheck size={14} weight="fill" />
-            Your Credential
+            LinkedIn Learning · 2026
           </span>
         </div>
       </Link>
@@ -168,21 +167,16 @@ export default function HomeBento() {
 
       {/* Testimonials: client cards drifting up a clipped column. */}
       <Link to="/testimonials" className="bento__card bento__card--quotes">
-        <CardHead Icon={Quotes} title="Testimonials" desc="PLACEHOLDER - one line on your clients." />
+        <CardHead Icon={Quotes} title="Testimonials" desc="Recommendations from former colleagues." />
         <div className="bento__media bento__reviews" aria-hidden="true">
           <div className="bento__reviews-track">
-            {[...CLIENTS, ...CLIENTS].map((c, i) => (
+            {[...siteContent.testimonials, ...siteContent.testimonials].map((testimonial, i) => (
               <span key={i} className="bento__review">
                 <span className="bento__review-top">
-                  {c.logo ? (
-                    <img src={c.logo} alt="" width={18} height={18} />
-                  ) : (
-                    <Quotes size={14} weight="fill" />
-                  )}
-                  <b>{c.name}</b>
+                  <Quotes size={14} weight="fill" />
+                  <b>{testimonial.name}</b>
                 </span>
-                <span className="bento__review-role">{c.role}</span>
-                <span className="bento__review-work">{c.work}</span>
+                <span className="bento__review-role">{testimonial.role}</span>
               </span>
             ))}
           </div>

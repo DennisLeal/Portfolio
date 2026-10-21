@@ -37,7 +37,7 @@ export const profile: Profile = {
   firstName: 'Dennis',
   handle: '@Papsitv',
   role: 'Workforce Management Systems Specialist',
-  avatarSrc: '/ProfilePhoto.jpg',
+  avatarSrc: `${import.meta.env.BASE_URL}ProfilePhoto.png`,
   verifiedLabel: 'WFM Expert',
   email: siteContent.hero.contact.email,
   location: siteContent.hero.location,
@@ -49,7 +49,7 @@ export const profile: Profile = {
   displayName: { line1: siteContent.hero.headline.split(' & ')[0], line2: siteContent.hero.headline.split(' & ')[1] },
   hero: {
     body: siteContent.hero.about,
-    portraitSrc: '/ProfilePhoto.jpg',
+    portraitSrc: `${import.meta.env.BASE_URL}ProfilePhoto.png`,
     portraitAlt: 'Dennis Leal Portrait',
   },
   socials: [

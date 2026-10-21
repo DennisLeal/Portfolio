@@ -73,16 +73,19 @@ export const siteContent = {
       name: 'GitHub Essential Training: 1 The Basics',
       issuer: 'LinkedIn Learning',
       year: '2026',
+      imageSrc: `${import.meta.env.BASE_URL}certifications/linkedin-learning-github-essential-training.png`,
     },
     {
       name: 'Strategic Prompt Engineering: From Fundamentals to Expertise',
       issuer: 'LinkedIn Learning',
       year: '2026',
+      imageSrc: `${import.meta.env.BASE_URL}certifications/linkedin-learning-040020.png`,
     },
     {
       name: 'AI-Powered Content Generation for Communications and Social Media Marketing by Adobe',
       issuer: 'LinkedIn Learning',
       year: '2026',
+      imageSrc: `${import.meta.env.BASE_URL}certifications/linkedin-learning-040027.png`,
     },
   ],
 
@@ -123,6 +126,27 @@ export const siteContent = {
         live: '#',
         source: '#',
       },
+    },
+  ],
+
+  testimonials: [
+    {
+      name: 'Mark Angelo Santiago',
+      role: 'Customer / Technical Support Lead • Data Analyst • Product QA',
+      date: 'November 22, 2019',
+      relationship: 'Worked on different teams',
+      quote:
+        "I've worked with Dennis since my day one in iQor Dasmariñas and I must say he's one of the best colleague I've ever had a pleasure of working with. His skills in managing/staffing people are one of the best I've seen so far. A highly respected RTA among his peers. Definitely someone that can be an asset to the company wherever he may be. Best of luck on your future endeavors.",
+      linkedin: 'https://www.linkedin.com/in/markangelo-ph/',
+    },
+    {
+      name: 'Hernie Tan',
+      role: 'Workforce Management Analyst',
+      date: 'November 16, 2019',
+      relationship: 'Worked on the same team',
+      quote:
+        'Great Team Player and Fun to Work With. Working with him creates a relaxing kind of vibe in the workplace. With his experience in the Workforce Management indsutry, he is one of the best resource person to reach with. He is reliable and adept in driving the team towards your day to day goal. Always looking forward to work with him for future projects.',
+      linkedin: 'https://www.linkedin.com/in/hernietan/',
     },
   ],
 }

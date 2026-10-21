@@ -242,7 +242,7 @@
   to   { transform: translateX(-50%); }
 }
 
-/* Credentials: the GHL badge on a ring. */
+/* Credentials: the certificate preview. */
 .bento__badge {
   display: flex;
   flex-direction: column;
@@ -260,7 +260,14 @@
   box-shadow: inset 0 0 0 1px var(--line), 0 0 0 8px var(--tint), 0 16px 30px -18px rgba(6, 12, 26, 0.6);
   transition: transform var(--dur-slow) var(--ease-spring);
 }
-.bento__badge-ring img { width: 66%; height: 66%; object-fit: contain; }
+.bento__certificate-preview {
+  display: block;
+  width: min(100%, 280px);
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 8px 18px -12px rgba(6, 12, 26, 0.55);
+}
 .bento__card:hover .bento__badge-ring { transform: scale(1.06) rotate(-6deg); }
 .bento__badge-tag {
   display: inline-flex;

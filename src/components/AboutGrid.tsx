@@ -8,10 +8,11 @@ import { siteContent } from '@/data/siteContent'
  * and support professional summaries of varying length.
  */
 
-const GITHUB = { src: '/icons/ai/github.svg', name: 'GitHub' }
-const CLAUDE = { src: '/icons/ai/claude-color.svg', name: 'Claude' }
-const OPENAI = { src: '/icons/openai.svg', name: 'OpenAI' }
-const VSCODE = { src: '/icons/vscode.svg', name: 'VS Code' }
+const ICONS = `${import.meta.env.BASE_URL}icons/`
+const GITHUB = { src: `${ICONS}ai/github.svg`, name: 'GitHub' }
+const CLAUDE = { src: `${ICONS}ai/claude-color.svg`, name: 'Claude' }
+const OPENAI = { src: `${ICONS}openai.svg`, name: 'OpenAI' }
+const VSCODE = { src: `${ICONS}vscode.svg`, name: 'VS Code' }
 
 type Capability = {
   index: string
@@ -44,7 +45,7 @@ const CAPABILITIES: Capability[] = [
 
 export default function AboutGrid() {
   return (
-    <section className="pgrid" style={{ padding: '4rem 2rem' }} aria-labelledby="about-title">
+    <section className="pgrid agrid" style={{ padding: '4rem 2rem' }} aria-labelledby="about-title">
       <header className="pgrid__head" style={{ marginBottom: '3rem' }}>
         <span className="pgrid__eyebrow">About</span>
         <h1 className="pgrid__title" id="about-title">
@@ -55,16 +56,7 @@ export default function AboutGrid() {
         </p>
       </header>
 
-      <div className="home__glass" style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: '3rem',
-        padding: '2rem',
-        borderRadius: '2rem',
-        background: 'var(--glass)',
-        backdropFilter: 'blur(12px)',
-        border: '1px solid var(--glass-border)'
-      }}>
+      <div className="home__glass agrid__glass">
         <div className="agrid__copy">
           <p className="agrid__lead" style={{ fontSize: '1.25rem', lineHeight: '1.6', marginBottom: '1.5rem' }}>
             {siteContent.hero.about}
@@ -102,11 +94,11 @@ export default function AboutGrid() {
           <div className="agrid__bar" style={{ marginTop: '3rem' }}>
             <span className="agrid__cell">
               <span className="agrid__cell-mark agrid__cell-mark--img">
-                <img src="/icons/ai/github.svg" alt="GitHub" loading="lazy" decoding="async" />
+                <img src={`${ICONS}linkedin.svg`} alt="" loading="lazy" decoding="async" />
               </span>
               <span className="agrid__cell-copy">
-                <span className="agrid__cell-title">GitHub Essential Training</span>
-                <span className="agrid__cell-meta">LinkedIn Learning · 2026</span>
+                <span className="agrid__cell-title">LinkedIn Learning</span>
+                <span className="agrid__cell-meta">Three course certificates</span>
               </span>
             </span>
 
@@ -122,7 +114,7 @@ export default function AboutGrid() {
 
             <a className="agrid__cell agrid__cell--wide" href={profile.socials[0].href} target="_blank" rel="noopener noreferrer">
               <span className="agrid__cell-mark agrid__cell-mark--plain">
-                <img src="/icons/linkedin.svg" alt="LinkedIn" loading="lazy" decoding="async" />
+                <img src={`${ICONS}linkedin.svg`} alt="LinkedIn" loading="lazy" decoding="async" />
               </span>
               <span className="agrid__cell-copy">
                 <span className="agrid__cell-title">LinkedIn Profile</span>
@@ -133,18 +125,45 @@ export default function AboutGrid() {
           </div>
         </div>
 
-        <div className="agrid__portrait" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div className="agrid__portrait">
           <img
             src={profile.avatarSrc}
             alt={profile.hero.portraitAlt}
             loading="eager"
             decoding="async"
-            style={{ maxWidth: '100%', height: 'auto', borderRadius: '2rem' }}
             width={400}
-            height={400}
+            height={594}
           />
         </div>
       </div>
+
+      <section className="agrid__certifications" aria-labelledby="certifications-title">
+        <header className="agrid__certifications-head">
+          <span className="pgrid__eyebrow">Certifications</span>
+          <h2 className="pgrid__title" id="certifications-title">
+            LinkedIn Learning
+          </h2>
+        </header>
+        <ul className="agrid__certifications-list" role="list">
+          {siteContent.certifications.map((certification) => (
+            <li className="agrid__certification" key={certification.name}>
+              <img
+                className="agrid__certificate-image"
+                src={certification.imageSrc}
+                alt={`${certification.name} certificate`}
+                loading="lazy"
+                decoding="async"
+                width={620}
+                height={466}
+              />
+              <h3 className="agrid__certificate-title">{certification.name}</h3>
+              <p className="agrid__certificate-meta">
+                {certification.issuer} · {certification.year}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </section>
     </section>
   )
 }
