@@ -19,7 +19,7 @@ npm run build
 npm run lint
 ```
 
-`npm run build` runs the TypeScript check and creates the static site in `dist/`. GitHub Actions deploys the site to GitHub Pages when changes are pushed to `main`.
+`npm run build` runs the TypeScript check and creates the static site in `dist/`, including a GitHub Pages fallback so direct links and page refreshes continue to load the React app. GitHub Actions deploys the site to GitHub Pages when changes are pushed to `main`.
 
 ## Content and assets
 
