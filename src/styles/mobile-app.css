@@ -262,11 +262,11 @@
   }
   .hprofile__avatar {
     width: 96px;
-    height: 128px;
+    height: 106px;
     flex: none;
     border-radius: 16px;
     object-fit: cover;
-    object-position: center bottom;
+    object-position: center top;
     background: var(--white);
     box-shadow: inset 0 0 0 1px var(--line), 0 6px 16px -8px rgba(11, 30, 63, 0.35);
   }
