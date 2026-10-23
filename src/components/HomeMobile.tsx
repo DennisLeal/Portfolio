@@ -7,7 +7,7 @@ import QuickMenu from './QuickMenu'
 /**
  * Home on a phone, the parts the rail and the bento used to carry:
  *
- *   HomeProfile  avatar, name, verified mark, handle and the QuickMenu
+ *   HomeProfile  name, verified mark, handle and the QuickMenu
  *                (theme + accessibility) - the rail's identity block, laid flat
  *   HomeStats    three proof facts (profile.stats), each named by a glyph so
  *                it reads at a glance
@@ -18,7 +18,6 @@ import QuickMenu from './QuickMenu'
 export function HomeProfile() {
   return (
     <header className="hprofile">
-      <img className="hprofile__avatar" src={profile.avatarSrc} alt="" width={56} height={56} />
       <div className="hprofile__who">
         <span className="hprofile__name">
           {profile.name}
@@ -34,6 +33,15 @@ export function HomeProfile() {
         </span>
       </div>
       <QuickMenu className="hprofile__menu" />
+      <ul className="hprofile__socials" role="list" aria-label="Social profiles">
+        {profile.socials.map(({ label, href }) => (
+          <li key={label}>
+            <a href={href} target="_blank" rel="noopener noreferrer">
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
     </header>
   )
 }
@@ -55,6 +63,14 @@ export function HomeStats() {
 const TILES = [
   {
     n: '01',
+    label: 'Work Experience',
+    to: '/experience',
+    title: 'Career history',
+    desc: 'NICE IEX support, WFM supervision, real-time operations, and client support.',
+    Icon: Briefcase,
+  },
+  {
+    n: '02',
     label: 'Projects',
     to: '/projects',
     title: 'WFM work & software projects',
@@ -62,7 +78,7 @@ const TILES = [
     img: siteContent.projects.find((project) => project.id === 'kcal-log')?.imageSrc,
   },
   {
-    n: '02',
+    n: '03',
     label: 'Support areas',
     to: '/services',
     title: 'NICE IEX & WFM support',
@@ -70,7 +86,7 @@ const TILES = [
     Icon: Stack,
   },
   {
-    n: '03',
+    n: '04',
     label: 'Testimonials',
     to: '/testimonials',
     title: 'Recommendations from colleagues',
@@ -78,20 +94,12 @@ const TILES = [
     Icon: Quotes,
   },
   {
-    n: '04',
-    label: 'Software projects',
-    to: '/projects',
-    title: 'Kcal Log & WinSentinel',
-    desc: 'A calorie-logging PWA and a simulated security prototype.',
-    img: siteContent.projects.find((project) => project.id === 'winsentinel')?.imageSrc,
-  },
-  {
     n: '05',
-    label: 'Work Experience',
-    to: '/experience',
-    title: 'Career history',
-    desc: 'Roles across NICE IEX support, WFM, real-time operations, and client support.',
-    Icon: Briefcase,
+    label: 'Credentials',
+    to: '/about',
+    title: 'LinkedIn Learning certificates',
+    desc: 'Three certificates in GitHub, prompt engineering, and AI content.',
+    img: siteContent.certifications[0].imageSrc,
   },
   {
     n: '06',

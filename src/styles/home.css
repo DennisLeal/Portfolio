@@ -16,7 +16,7 @@
   .home {
     height: 100%;
     display: grid;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto 1fr;
     min-height: 0;
     /* Without this a nowrap child sets the grid's min-content width and the
        whole column - marquee and workflow included - is laid out wider than
@@ -53,6 +53,160 @@
   .home__line { white-space: nowrap; }
 }
 
+/* Pair the profile portrait and intro video beside the Home introduction. */
+.home__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(20px, 3vw, 48px);
+  min-width: 0;
+}
+.home__intro .home__head { min-width: 0; }
+.home__intro .home__line { white-space: normal; }
+.home__intro .home__title { font-size: clamp(30px, 3.25vw, 60px); }
+.home__intro-media {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1vw, 14px);
+  height: clamp(190px, 30vh, 270px);
+}
+.home__intro-portrait {
+  display: block;
+  height: 100%;
+  width: auto;
+  aspect-ratio: 400 / 594;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 12px 18px rgba(6, 12, 26, 0.25));
+}
+.home__intro-video {
+  width: auto;
+  height: 100%;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  border: 1px solid rgba(132, 183, 242, 0.45);
+  border-radius: 22px;
+  background: #071426;
+  box-shadow: 0 20px 46px -24px rgba(0, 0, 0, 0.72);
+}
+.home__intro-player {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Desktop: the video is a tall column beside the tools band and the bento. */
+.home__stage {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.6vh, 20px);
+  min-width: 0;
+}
+.home__stage-video { display: flex; justify-content: center; }
+.home__stage-video .home__intro-video { width: min(270px, 100%); }
+.home__stage-main {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.6vh, 20px);
+  min-width: 0;
+}
+@media (min-width: 1100px) {
+  .home__stage {
+    display: grid;
+    grid-template-columns: clamp(190px, 17vw, 270px) minmax(0, 1fr);
+    min-height: 0;
+  }
+  .home__stage-video { min-height: 0; }
+  .home__stage-video .home__intro-video { width: 100%; height: 100%; aspect-ratio: auto; }
+  .home__stage-main { display: grid; grid-template-rows: auto minmax(0, 1fr); min-height: 0; }
+}
+
+/* Desktop: a career timeline fills the space right of the intro copy. */
+.home__career { display: none; }
+@media (min-width: 1100px) {
+  .home__intro {
+    grid-template-columns: minmax(0, 1fr) clamp(300px, 32vw, 520px);
+    column-gap: clamp(20px, 3vw, 48px);
+    row-gap: 12px;
+  }
+  .home__intro .home__head { display: contents; }
+  .home__intro .home__headline { grid-column: 1 / -1; grid-row: 1; }
+  .home__intro .home__line { white-space: nowrap; }
+  .home__intro .home__title { font-size: clamp(28px, 2.9vw, 56px); }
+  .home__intro .home__headline { gap: 24px; }
+  .home__intro .home__lede { grid-column: 1; grid-row: 2; }
+  .home__intro .home__experience-cta { grid-column: 1; grid-row: 3; align-self: start; margin-top: 0; }
+  .home__career { grid-column: 2; grid-row: 2 / span 2; }
+  .home__career {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-self: stretch;
+    padding: 14px 18px;
+    border-radius: 18px;
+    border: 1px solid var(--line-strong);
+    background: rgba(255, 255, 255, 0.55);
+    color: var(--navy);
+    transition: transform var(--dur-med) var(--ease-spring), border-color var(--dur-fast) var(--ease-out);
+  }
+  [data-theme='dark'] .home__career { background: rgba(255, 255, 255, 0.05); }
+  .home__career:hover { transform: translateY(-2px); border-color: var(--orange); }
+  .home__career:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
+  .home__career-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange-ink);
+  }
+  .home__career-list { list-style: none; margin: 0; padding: 0 0 0 14px; display: grid; gap: 8px; position: relative; }
+  .home__career-list::before {
+    content: '';
+    position: absolute;
+    left: 3px; top: 6px; bottom: 6px;
+    width: 2px;
+    background: var(--line-strong);
+  }
+  .home__career-list li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    line-height: 1.3;
+  }
+  .home__career-list li::before {
+    content: '';
+    position: absolute;
+    left: -15px; top: 5px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--paper, #fff);
+    box-shadow: 0 0 0 2px var(--line-strong);
+  }
+  .home__career-list li.is-current::before { background: var(--orange); box-shadow: 0 0 0 2px var(--orange); }
+  .home__career-period { font-size: 11px; font-weight: 600; color: var(--muted); }
+  .home__career-role { font-size: 13.5px; font-weight: 650; }
+  .home__career-employer { font-size: 12px; color: var(--muted); }
+  .home__career-stats {
+    list-style: none;
+    margin: 2px 0 0;
+    padding: 10px 0 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    border-top: 1px solid var(--line);
+  }
+  .home__career-stats strong { display: block; font-size: 14px; font-weight: 700; }
+  .home__career-stats span { display: block; font-size: 11px; line-height: 1.25; color: var(--muted); }
+}
+@media (min-width: 1100px) and (max-height: 900px) {
+  .home__career { padding: 10px 16px; gap: 6px; }
+  .home__career-list { gap: 5px; }
+  .home__career-list li { display: flex; flex-wrap: wrap; column-gap: 8px; align-items: baseline; }
+  .home__career-period { flex-basis: 100%; }
+  .home__career-employer, .home__career-stats { display: none; }
+}
+
 .home__cta {
   display: inline-flex;
   align-items: center;
@@ -71,6 +225,20 @@
 }
 .home__cta svg { color: var(--orange); }
 .home__cta:hover { transform: translateY(-2px); }
+
+.home__experience-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  margin-top: 14px;
+  color: var(--orange-ink);
+  font-size: 14px;
+  font-weight: 650;
+  transition: color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.home__experience-cta:hover { color: var(--orange); transform: translateX(2px); }
+.home__experience-cta:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }
 
 /* One line, from 1400px up.
    The sentence is 130 characters. Measured against the panel it needs roughly
@@ -280,6 +448,20 @@
     margin: 0 auto;
   }
   .home__headline { flex-direction: column; }
+  .home__intro {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 22px;
+  }
+  .home__intro-media {
+    align-self: center;
+    width: 100%;
+    justify-content: center;
+    height: min(clamp(230px, 38vh, 320px), 82vw);
+  }
+  .home__intro-portrait { object-fit: cover; object-position: center top; border-radius: 18px; }
+  .home__intro .home__title { font-size: min(clamp(30px, 3.5vw, 72px), calc((100vw - 2 * var(--panel-x)) / var(--headline-em, 15.4))); }
 
   /* The floating pill is fixed at the top of the document down here, so the
      headline has to start below it or the first line reads through the navy. */
