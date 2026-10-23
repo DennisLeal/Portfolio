@@ -3,18 +3,24 @@ import { useEffect, type RefObject } from 'react'
 // One line per 4s slide of dennis-leal-wfm-intro.mp4 (0, 4, 8, 12, 16s).
 const SLIDE_SECONDS = 4
 const LINES = [
-  "I'm Dennis Leal, an I-E-X Administrator with ten years in workforce management. First, WFM class and scenario tracking.",
-  'A NICE I-E-X admin operations playbook.',
-  'Kcal Log, a calorie tracking app.',
-  'WinSentinel, a Windows security prototype.',
-  "And Zelven Labs, AI-assisted software. Let's work together.",
+  'Dennis Leal. Ten years in workforce management. Class and scenario tracking.',
+  'A NICE I-E-X operations playbook.',
+  'Kcal Log. A calorie tracker.',
+  'WinSentinel. A security prototype.',
+  "Zelven Labs. Let's build something together.",
 ]
 
+const MALE_VOICE = /\b(guy|david|mark|daniel|george|james|ryan|brian|christopher|eric|male|alex|fred|aaron|arthur|thomas)\b/i
+const FEMALE_VOICE = /\b(zira|hazel|susan|samantha|aria|jenny|sonia|libby|karen|moira|female|victoria|ava)\b/i
+
+// Prefer a natural-sounding male English voice; fall back to any non-female one.
 function pickVoice(synth: SpeechSynthesis) {
   const voices = synth.getVoices().filter((v) => v.lang.toLowerCase().startsWith('en'))
+  const male = voices.filter((v) => MALE_VOICE.test(v.name) && !FEMALE_VOICE.test(v.name))
   return (
-    voices.find((v) => /natural|online|google/i.test(v.name)) ??
-    voices.find((v) => v.lang.toLowerCase() === 'en-us') ??
+    male.find((v) => /natural|online/i.test(v.name)) ??
+    male[0] ??
+    voices.find((v) => !FEMALE_VOICE.test(v.name)) ??
     voices[0]
   )
 }
@@ -34,7 +40,8 @@ export function useVideoVoiceover(ref: RefObject<HTMLVideoElement | null>, layou
 
     const speak = (index: number) => {
       const utterance = new SpeechSynthesisUtterance(LINES[index])
-      utterance.rate = 1.1
+      utterance.rate = 0.82
+      utterance.pitch = 0.6
       utterance.lang = 'en-US'
       const voice = pickVoice(synth)
       if (voice) utterance.voice = voice
