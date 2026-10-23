@@ -261,20 +261,21 @@
     margin-bottom: 22px;
   }
   .hprofile__avatar {
-    width: 56px;
-    height: 56px;
+    width: 64px;
+    height: 64px;
+    flex: none;
     border-radius: 50%;
     object-fit: cover;
     object-position: top;
     background: var(--white);
     box-shadow: inset 0 0 0 1px var(--line), 0 6px 16px -8px rgba(11, 30, 63, 0.35);
   }
-  .hprofile__who { display: flex; flex-direction: column; min-width: 0; }
+  .hprofile__who { display: flex; flex-direction: column; min-width: 0; flex: 1 1 0; }
   .hprofile__name {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 800;
     letter-spacing: -0.02em;
     line-height: 1.05;
@@ -282,8 +283,8 @@
   }
   .hprofile__verified { color: var(--verified); flex: none; }
   .hprofile__role {
-    margin-top: 6px;
-    font-size: 16px;
+    margin-top: 4px;
+    font-size: 14px;
     font-weight: 700;
     line-height: 1.25;
     color: #f0791f;
