@@ -39,7 +39,7 @@ export const profile: Profile = {
   firstName: 'Dennis',
   handle: '@DennisLeal',
   role: 'IEX Administrator · WFM Support',
-  avatarSrc: `${import.meta.env.BASE_URL}ProfilePhoto.png?v=20261022`,
+  avatarSrc: `${import.meta.env.BASE_URL}ProfilePhoto.png?v=20261023`,
   verifiedLabel: 'NICE IEX Administrator',
   email: siteContent.hero.contact.email,
   location: siteContent.hero.location,
@@ -51,7 +51,7 @@ export const profile: Profile = {
   displayName: { line1: 'IEX Administrator', line2: 'Workforce Management' },
   hero: {
     body: siteContent.hero.about,
-    portraitSrc: `${import.meta.env.BASE_URL}ProfilePhoto.png?v=20261022`,
+    portraitSrc: `${import.meta.env.BASE_URL}ProfilePhoto.png?v=20261023`,
     portraitAlt: 'Dennis Leal Portrait',
   },
   socials: [

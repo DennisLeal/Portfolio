@@ -20,10 +20,10 @@ export function HomeProfile() {
     <header className="hprofile">
       <img
         className="hprofile__avatar"
-        src={`${import.meta.env.BASE_URL}ProfilePhoto-m.webp?v=1`}
+        src={`${import.meta.env.BASE_URL}ProfilePhoto-m.webp?v=20261023`}
         alt={profile.hero.portraitAlt}
-        width={56}
-        height={56}
+        width={80}
+        height={80}
       />
       <div className="hprofile__who">
         <span className="hprofile__name">

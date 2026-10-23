@@ -55,7 +55,7 @@ export default function Home() {
   }, [autoplay])
 
   const portraitSrc = phone
-    ? `${import.meta.env.BASE_URL}ProfilePhoto-m.webp?v=1`
+    ? `${import.meta.env.BASE_URL}ProfilePhoto-m.webp?v=20261023`
     : profile.hero.portraitSrc
 
   const video = (
