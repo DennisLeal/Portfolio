@@ -3,53 +3,43 @@ import { motionReduced } from '@/lib/a11y'
 
 let ctx: AudioContext | null = null
 
-// Short synthesized lightsaber swing: two slightly detuned saw waves give the
-// beating hum, a low-pass sweep opens and closes like a pass-by, and a quiet
-// sub tone adds body. No audio file to ship or load.
-function plink(strength = 1) {
+// Soft UI click: Kenney "Interface Sounds" (CC0), see public/sounds/.
+let buffer: AudioBuffer | null = null
+let loading = false
+
+function plink() {
   try {
     const AC = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
     if (!AC) return
     ctx ??= new AC()
     if (ctx.state === 'suspended') void ctx.resume()
     const c = ctx
-    const t = c.currentTime
-    const dur = 0.4
-
-    const master = c.createGain()
-    master.gain.setValueAtTime(0.0001, t)
-    master.gain.exponentialRampToValueAtTime(0.028 * strength, t + 0.05)
-    master.gain.exponentialRampToValueAtTime(0.0001, t + dur)
-
-    const filter = c.createBiquadFilter()
-    filter.type = 'lowpass'
-    filter.Q.value = 4
-    filter.frequency.setValueAtTime(350, t)
-    filter.frequency.exponentialRampToValueAtTime(1600, t + 0.13)
-    filter.frequency.exponentialRampToValueAtTime(300, t + dur)
-
-    const tone = (type: OscillatorType, from: number, peak: number, to: number, vol: number) => {
-      const osc = c.createOscillator()
-      const gain = c.createGain()
-      osc.type = type
-      osc.frequency.setValueAtTime(from, t)
-      osc.frequency.exponentialRampToValueAtTime(peak, t + 0.12)
-      osc.frequency.exponentialRampToValueAtTime(to, t + dur)
-      gain.gain.value = vol
-      osc.connect(gain).connect(filter)
-      osc.start(t)
-      osc.stop(t + dur + 0.02)
+    if (!buffer) {
+      if (!loading) {
+        loading = true
+        fetch(`${import.meta.env.BASE_URL}sounds/click.mp3`)
+          .then((r) => r.arrayBuffer())
+          .then((data) => c.decodeAudioData(data))
+          .then((b) => {
+            buffer = b
+          })
+          .catch(() => {
+            loading = false
+          })
+      }
+      return
     }
-    tone('sawtooth', 95, 150, 105, 0.6)
-    tone('sawtooth', 99, 156, 109, 0.6)
-    tone('sine', 55, 75, 52, 0.8)
-
-    filter.connect(master).connect(c.destination)
+    const src = c.createBufferSource()
+    const gain = c.createGain()
+    src.buffer = buffer
+    src.playbackRate.value = 0.95 + Math.random() * 0.1
+    gain.gain.value = 0.7
+    src.connect(gain).connect(c.destination)
+    src.start()
   } catch {
     /* audio is a bonus; never break the page over it */
   }
 }
-
 function ripple(x: number, y: number, size: number, rings: number, cls = '') {
   for (let i = 0; i < rings; i++) {
     const el = document.createElement('span')
@@ -65,7 +55,7 @@ function ripple(x: number, y: number, size: number, rings: number, cls = '') {
 
 /**
  * Pointer "sensor": every press (mouse or touch) sends a water ripple out from
- * the contact point with a soft lightsaber swing sound, and on a mouse a faint ripple trails
+ * the contact point with a soft click sound, and on a mouse a faint ripple trails
  * the cursor as it travels.
  */
 export default function RippleFx() {
