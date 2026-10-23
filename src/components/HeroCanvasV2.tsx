@@ -205,7 +205,7 @@ export default function HeroCanvasV2() {
     const mesh = new THREE.Mesh(geo, mat)
     scene.add(mesh)
 
-    let tgt = { x: 0, y: 0 }, cur = { x: 0, y: 0 }
+    const tgt = { x: 0, y: 0 }, cur = { x: 0, y: 0 }
     const onMove = (e: MouseEvent) => {
       tgt.x = (e.clientX / window.innerWidth) * 2 - 1
       tgt.y = -(e.clientY / window.innerHeight) * 2 + 1

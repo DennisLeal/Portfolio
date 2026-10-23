@@ -24,8 +24,10 @@ export const MAX_MESSAGE = 5000
 // Built from \u escapes so the source stays pure ASCII.
 // Control chars U+0000-U+001F and U+007F; when newlines are allowed, tab,
 // LF and CR survive. Zero-width and bidi marks always go.
+/* eslint-disable no-control-regex -- stripping control characters is the purpose */
 const CTRL_NO_NL = new RegExp('[\\u0000-\\u001F\\u007F]', 'g')
 const CTRL_KEEP_NL = new RegExp('[\\u0000-\\u0008\\u000B\\u000C\\u000E-\\u001F\\u007F]', 'g')
+/* eslint-enable no-control-regex */
 const ZERO_WIDTH = new RegExp('[\\u200B-\\u200F\\u202A-\\u202E\\u2060\\uFEFF]', 'g')
 
 export function sanitize(input: string, allowNewlines = false): string {

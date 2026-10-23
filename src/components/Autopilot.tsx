@@ -327,7 +327,10 @@ export default function Autopilot({ compact = false, maxScale = 1 }: AutopilotPr
     if (!el) return
     const io = new IntersectionObserver(
       ([entry]) => {
-        for (const t of tweensRef.current) entry.isIntersecting ? t.play() : t.pause()
+        for (const t of tweensRef.current) {
+          if (entry.isIntersecting) t.play()
+          else t.pause()
+        }
       },
       { threshold: 0 },
     )
