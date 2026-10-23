@@ -123,6 +123,41 @@ button {
   background: var(--cream);
 }
 
+/* Looping SVG contour lines: the background wherever the WebGL shader is not
+   running (phones, reduced motion, low perf tier). */
+.motion-lines {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--cream);
+}
+.motion-lines svg { width: 100%; height: 100%; display: block; }
+.motion-lines path {
+  fill: none;
+  stroke: rgba(11, 30, 63, 0.32);
+  stroke-width: 1.3;
+  vector-effect: non-scaling-stroke;
+  animation: motion-lines-drift 50s linear infinite;
+  will-change: transform;
+}
+[data-theme='dark'] .motion-lines path { stroke: rgba(255, 255, 255, 0.28); }
+@keyframes motion-lines-drift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-800px); }
+}
+/* A slow decorative drift, so it ignores the OS reduced-motion flag; the
+   in-app Reduce motion toggle (data-a11y-motion) still stops it. */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-a11y-motion='true']) .motion-lines path {
+    animation-name: motion-lines-drift !important;
+    animation-timing-function: linear !important;
+    animation-iteration-count: infinite !important;
+    animation-duration: 60s !important;
+  }
+}
+
 main > * {
   position: relative;
   z-index: 1;

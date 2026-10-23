@@ -6,6 +6,7 @@ import Rail from '@/components/Rail'
 import IntroOverlay from '@/components/IntroOverlay'
 import CursorRing from '@/components/CursorRing'
 import AccessMenu from '@/components/AccessMenu'
+import MotionLines from '@/components/MotionLines'
 import { motionReduced } from '@/lib/a11y'
 import { useLenis, SCROLLER_ID } from '@/hooks/useLenis'
 import { useIsPhone } from '@/hooks/useMediaQuery'
@@ -97,10 +98,12 @@ export default function App() {
       <IntroOverlay />
       <CursorRing />
       <a href={`#${SCROLLER_ID}`} className="skip-link">Skip to main content</a>
-      {shouldLoadCanvas && perfTier !== 'low' && (
+      {shouldLoadCanvas && perfTier !== 'low' ? (
         <Suspense fallback={null}>
           <HeroCanvas />
         </Suspense>
+      ) : (
+        <MotionLines />
       )}
       {phone && pathname !== '/' && <QuickMenu className="qmenu--float" />}
       <div className="shell">
