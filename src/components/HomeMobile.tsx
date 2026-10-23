@@ -22,8 +22,8 @@ export function HomeProfile() {
         className="hprofile__avatar"
         src={`${import.meta.env.BASE_URL}ProfilePhoto-m.webp?v=20261023`}
         alt={profile.hero.portraitAlt}
-        width={80}
-        height={80}
+        width={96}
+        height={128}
       />
       <div className="hprofile__who">
         <span className="hprofile__name">

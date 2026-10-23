@@ -261,12 +261,12 @@
     margin-bottom: 22px;
   }
   .hprofile__avatar {
-    width: 80px;
-    height: 80px;
+    width: 96px;
+    height: 128px;
     flex: none;
-    border-radius: 50%;
+    border-radius: 16px;
     object-fit: cover;
-    object-position: top;
+    object-position: center bottom;
     background: var(--white);
     box-shadow: inset 0 0 0 1px var(--line), 0 6px 16px -8px rgba(11, 30, 63, 0.35);
   }
