@@ -90,28 +90,6 @@
   box-shadow: 0 20px 46px -24px rgba(0, 0, 0, 0.72);
 }
 .home__intro-video { position: relative; }
-.home__intro-sound {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 999px;
-  background: rgba(7, 20, 38, 0.82);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 650;
-  white-space: nowrap;
-  cursor: pointer;
-  backdrop-filter: blur(6px);
-}
-.home__intro-sound:hover { background: var(--orange); }
-.home__intro-sound:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
 .home__intro-player {
   display: block;
   width: 100%;

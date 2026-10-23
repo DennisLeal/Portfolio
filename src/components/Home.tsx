@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, SpeakerHigh, SpeakerSlash } from '@/components/slab'
+import { ArrowUpRight } from '@/components/slab'
 import { profile } from '@/data/profile'
 import { siteContent } from '@/data/siteContent'
 import { A11Y_EVENT, motionReduced } from '@/lib/a11y'
@@ -9,7 +9,6 @@ import HomeBento from './HomeBento'
 import { HomeProfile, HomeStats, HomeExplore } from './HomeMobile'
 import { useScrollReveal } from '@/hooks/useScrollReveal'
 import { useIsPhone } from '@/hooks/useMediaQuery'
-import { useVideoVoiceover } from '@/hooks/useVideoVoiceover'
 
 /**
  * Home. One viewport, three bands, no scroll:
@@ -55,28 +54,6 @@ export default function Home() {
     if (!autoplay) videoRef.current?.pause()
   }, [autoplay])
 
-  useVideoVoiceover(videoRef, phone)
-
-  const [muted, setMuted] = useState(true)
-  useEffect(() => {
-    const video = videoRef.current
-    if (!video) return
-    const sync = () => setMuted(video.muted)
-    sync()
-    video.addEventListener('volumechange', sync)
-    return () => video.removeEventListener('volumechange', sync)
-  }, [phone])
-
-  const toggleSound = () => {
-    const video = videoRef.current
-    if (!video) return
-    video.muted = !video.muted
-    if (!video.muted) {
-      video.volume = 1
-      void video.play()
-    }
-  }
-
   const video = (
     <div className="home__intro-video">
       <video
@@ -95,25 +72,11 @@ export default function Home() {
         title="Unmute for voice-over"
       >
         <source
-          src={`${import.meta.env.BASE_URL}videos/dennis-leal-wfm-intro.mp4?v=2`}
+          src={`${import.meta.env.BASE_URL}videos/dennis-leal-wfm-intro.mp4?v=4`}
           type="video/mp4"
         />
         Your browser does not support embedded video.
       </video>
-      <button
-        type="button"
-        className="home__intro-sound"
-        onClick={toggleSound}
-        aria-pressed={!muted}
-        aria-label={muted ? 'Turn on voice-over' : 'Turn off voice-over'}
-      >
-        {muted ? (
-          <SpeakerSlash size={18} weight="fill" aria-hidden="true" />
-        ) : (
-          <SpeakerHigh size={18} weight="fill" aria-hidden="true" />
-        )}
-        <span>{muted ? 'Voice-over' : 'Sound on'}</span>
-      </button>
     </div>
   )
 
