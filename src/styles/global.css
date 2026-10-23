@@ -134,6 +134,41 @@ button {
   background: var(--cream);
 }
 .motion-lines svg { width: 100%; height: 100%; display: block; }
+
+/* Click / touch water ripple (RippleFx.tsx). */
+.ripple-fx__ring {
+  position: fixed;
+  z-index: 9998;
+  width: var(--ripple-size, 200px);
+  height: var(--ripple-size, 200px);
+  margin: calc(var(--ripple-size, 200px) / -2) 0 0 calc(var(--ripple-size, 200px) / -2);
+  border-radius: 50%;
+  border: 2px solid rgba(232, 106, 16, 0.7);
+  box-shadow: 0 0 18px rgba(232, 106, 16, 0.25), inset 0 0 12px rgba(232, 106, 16, 0.15);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.05);
+  animation: ripple-fx 900ms cubic-bezier(0.22, 0.7, 0.3, 1) both;
+}
+.ripple-fx__ring--faint {
+  border-width: 1px;
+  border-color: rgba(11, 30, 63, 0.35);
+  box-shadow: none;
+  animation-duration: 800ms;
+}
+[data-theme='dark'] .ripple-fx__ring--faint { border-color: rgba(255, 255, 255, 0.35); }
+@keyframes ripple-fx {
+  0%   { opacity: 0.9; transform: scale(0.05); }
+  100% { opacity: 0;   transform: scale(1); }
+}
+:root[data-a11y-motion='true'] .ripple-fx__ring { display: none; }
+/* Short click feedback the visitor asked for; only the in-app toggle stops it. */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-a11y-motion='true']) .ripple-fx__ring {
+    animation-duration: 900ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
 .motion-lines path {
   fill: none;
   stroke: rgba(11, 30, 63, 0.32);

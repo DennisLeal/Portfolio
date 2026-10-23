@@ -7,6 +7,7 @@ import IntroOverlay from '@/components/IntroOverlay'
 import CursorRing from '@/components/CursorRing'
 import AccessMenu from '@/components/AccessMenu'
 import MotionLines from '@/components/MotionLines'
+import RippleFx from '@/components/RippleFx'
 import { motionReduced } from '@/lib/a11y'
 import { useLenis, SCROLLER_ID } from '@/hooks/useLenis'
 import { useIsPhone } from '@/hooks/useMediaQuery'
@@ -97,6 +98,7 @@ export default function App() {
     <>
       <IntroOverlay />
       <CursorRing />
+      <RippleFx />
       <a href={`#${SCROLLER_ID}`} className="skip-link">Skip to main content</a>
       {shouldLoadCanvas && perfTier !== 'low' ? (
         <Suspense fallback={null}>
