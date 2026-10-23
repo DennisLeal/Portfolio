@@ -268,6 +268,14 @@
 .home .tools-marquee { margin: 0; border-radius: 14px; border: 1px solid var(--line-strong); }
 /* Smaller on Home: the strip is a band under the head, not a section. */
 .home .tools-marquee__track { gap: 44px; padding: 14px 28px; animation-duration: 32s; }
+/* The tools strip is a slow, gentle drift the visitor asked to keep moving, so
+   it ignores the OS-level reduced-motion flag; the in-app Reduce motion
+   toggle still stops it. */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-a11y-motion='true']) .home .tools-marquee__track {
+    animation: marquee 32s linear infinite !important;
+  }
+}
 .home .tools-marquee__item { gap: 10px; padding-right: 44px; font-size: 13.5px; }
 .home .tools-marquee__item::after { height: 16px; }
 .home .tools-marquee__icon, .home .tools-marquee__img, .home .tools-marquee__mark { width: 20px; height: 20px; }
