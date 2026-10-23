@@ -192,6 +192,20 @@ button {
     animation-duration: 60s !important;
   }
 }
+/* Phone: the single group moves, not each path. */
+.motion-lines--lite path { animation: none; will-change: auto; }
+.motion-lines--lite g { animation: motion-lines-drift 60s linear infinite; will-change: transform; }
+:root[data-a11y-motion='true'] .motion-lines--lite g { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-a11y-motion='true']) .motion-lines--lite path { animation: none !important; }
+  :root:not([data-a11y-motion='true']) .motion-lines--lite g {
+    animation: motion-lines-drift 60s linear infinite !important;
+  }
+}
+/* Touch: lighter tap ripple (no glow shadows, fewer layers to paint). */
+@media (pointer: coarse) {
+  .ripple-fx__ring { box-shadow: none; }
+}
 
 main > * {
   position: relative;

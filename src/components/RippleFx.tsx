@@ -58,7 +58,7 @@ export default function RippleFx() {
 
     const onDown = (e: PointerEvent) => {
       if (motionReduced()) return
-      ripple(e.clientX, e.clientY, 220, 3)
+      ripple(e.clientX, e.clientY, 220, e.pointerType === 'mouse' ? 3 : 2)
       plink()
     }
     const onMove = (e: PointerEvent) => {

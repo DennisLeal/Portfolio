@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { SealCheck, CaretRight, Quotes, Stack, Briefcase } from '@/components/slab'
+import { SealCheck, CaretRight, Quotes, Stack, Briefcase, GithubLogo, LinkedinLogo } from '@/components/slab'
 import { profile } from '@/data/profile'
 import { siteContent } from '@/data/siteContent'
 import QuickMenu from './QuickMenu'
@@ -22,25 +22,34 @@ export function HomeProfile() {
         <span className="hprofile__name">
           {profile.name}
           <SealCheck
-            size={16}
+            size={24}
             weight="fill"
             className="hprofile__verified"
             aria-label={profile.verifiedLabel}
           />
         </span>
-        <span className="hprofile__handle">
-          {profile.handle} · {profile.role}
-        </span>
+        <span className="hprofile__role">{profile.role}</span>
+        <span className="hprofile__handle">{profile.handle}</span>
       </div>
       <QuickMenu className="hprofile__menu" />
       <ul className="hprofile__socials" role="list" aria-label="Social profiles">
-        {profile.socials.map(({ label, href }) => (
-          <li key={label}>
-            <a href={href} target="_blank" rel="noopener noreferrer">
-              {label}
-            </a>
-          </li>
-        ))}
+        {profile.socials.map(({ label, href }) => {
+          const github = /github/i.test(label)
+          const Logo = github ? GithubLogo : LinkedinLogo
+          return (
+            <li key={label}>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={github ? 'hprofile__social--github' : 'hprofile__social--linkedin'}
+              >
+                <Logo size={18} weight="fill" aria-hidden="true" />
+                {label}
+              </a>
+            </li>
+          )
+        })}
       </ul>
     </header>
   )

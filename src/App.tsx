@@ -105,7 +105,7 @@ export default function App() {
           <HeroCanvas />
         </Suspense>
       ) : (
-        <MotionLines />
+        <MotionLines lite={phone} />
       )}
       {phone && pathname !== '/' && <QuickMenu className="qmenu--float" />}
       <div className="shell">

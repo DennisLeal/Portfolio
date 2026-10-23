@@ -5,8 +5,7 @@ const SPAN = PERIOD * 4
 
 // A sine contour whose period divides PERIOD, so sliding it by exactly PERIOD
 // lands on an identical frame: the CSS loop has no visible seam.
-function wave(base: number, amp: number, cycles: number, phase: number) {
-  const step = 20
+function wave(base: number, amp: number, cycles: number, phase: number, step = 20) {
   let d = ''
   for (let x = -PERIOD; x <= SPAN - PERIOD; x += step) {
     const y = base + amp * Math.sin((x / PERIOD) * Math.PI * 2 * cycles + phase)
@@ -22,12 +21,32 @@ const LINES = Array.from({ length: 14 }, (_, i) => ({
   opacity: 0.3 + (i % 3) * 0.12,
 }))
 
+const LITE_LINES = Array.from({ length: 6 }, (_, i) => ({
+  d: wave(70 + i * 150, 40 + (i % 3) * 16, 1 + (i % 2), i * 0.9, 40),
+  opacity: 0.35 + (i % 3) * 0.1,
+}))
+
 /**
  * Looping contour lines behind every page. Pure SVG + CSS so it runs on phones
- * and on desktops where the WebGL shader is skipped.
+ * and on desktops where the WebGL shader is skipped. `lite` (phones) draws
+ * fewer, coarser lines inside one group so the GPU composites a single moving
+ * layer instead of fourteen.
  */
-export default function MotionLines() {
+export default function MotionLines({ lite = false }: { lite?: boolean }) {
   const paths = useMemo(() => LINES, [])
+  if (lite) {
+    return (
+      <div className="motion-lines motion-lines--lite" aria-hidden="true">
+        <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+          <g>
+            {LITE_LINES.map((l, i) => (
+              <path key={i} d={l.d} style={{ opacity: l.opacity }} />
+            ))}
+          </g>
+        </svg>
+      </div>
+    )
+  }
   return (
     <div className="motion-lines" aria-hidden="true">
       <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">

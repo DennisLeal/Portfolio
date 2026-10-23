@@ -54,6 +54,10 @@ export default function Home() {
     if (!autoplay) videoRef.current?.pause()
   }, [autoplay])
 
+  const portraitSrc = phone
+    ? `${import.meta.env.BASE_URL}ProfilePhoto-m.webp?v=1`
+    : profile.hero.portraitSrc
+
   const video = (
     <div className="home__intro-video">
       <video
@@ -67,7 +71,7 @@ export default function Home() {
         preload="metadata"
         width={270}
         height={480}
-        poster={profile.hero.portraitSrc}
+        poster={portraitSrc}
         aria-label="An animated introduction to Dennis Leal's WFM experience and projects. Unmute for a spoken voice-over."
         title="Unmute for voice-over"
       >
@@ -125,7 +129,7 @@ export default function Home() {
           <div className="home__intro-media">
             <img
               className="home__intro-portrait"
-              src={profile.hero.portraitSrc}
+              src={portraitSrc}
               alt={profile.hero.portraitAlt}
               width={400}
               height={594}
