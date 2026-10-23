@@ -133,8 +133,9 @@
   }
   .home__intro .home__head { display: contents; }
   .home__intro .home__headline { grid-column: 1 / -1; grid-row: 1; }
-  .home__intro .home__line { white-space: nowrap; }
-  .home__intro .home__title { font-size: clamp(28px, 2.9vw, 56px); }
+  .home__intro .home__headline { min-width: 0; }
+  .home__intro .home__title { font-size: clamp(24px, 2.9vw, 56px); min-width: 0; flex: 1 1 0; }
+  .home__intro .home__line { white-space: normal; }
   .home__intro .home__headline { gap: 24px; }
   .home__intro .home__lede { grid-column: 1; grid-row: 2; }
   .home__intro .home__experience-cta { grid-column: 1; grid-row: 3; align-self: start; margin-top: 0; }
@@ -199,6 +200,9 @@
   }
   .home__career-stats strong { display: block; font-size: 14px; font-weight: 700; }
   .home__career-stats span { display: block; font-size: 11px; line-height: 1.25; color: var(--muted); }
+}
+@media (min-width: 1360px) {
+  .home__intro .home__line { white-space: nowrap; }
 }
 @media (min-width: 1100px) and (max-height: 900px) {
   .home__career { padding: 10px 16px; gap: 6px; }
