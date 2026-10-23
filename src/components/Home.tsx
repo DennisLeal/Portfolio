@@ -126,17 +126,7 @@ export default function Home() {
         </div>
 
         {phone && (
-          <div className="home__intro-media">
-            <img
-              className="home__intro-portrait"
-              src={portraitSrc}
-              alt={profile.hero.portraitAlt}
-              width={400}
-              height={594}
-              fetchPriority="high"
-            />
-            {video}
-          </div>
+          <div className="home__intro-media">{video}</div>
         )}
         {!phone && (
           <Link className="home__career" to="/experience" aria-label="Career snapshot - view full work experience">

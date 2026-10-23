@@ -471,7 +471,7 @@
     align-self: center;
     width: 100%;
     justify-content: center;
-    height: min(clamp(230px, 38vh, 320px), 82vw);
+    height: min(clamp(320px, 52vh, 440px), 112vw);
   }
   .home__intro-portrait { object-fit: cover; object-position: center top; border-radius: 18px; }
   .home__intro .home__title { font-size: min(clamp(30px, 3.5vw, 72px), calc((100vw - 2 * var(--panel-x)) / var(--headline-em, 15.4))); }
