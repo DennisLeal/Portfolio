@@ -267,7 +267,7 @@
    and let the strip line up with the workflow window below it. */
 .home .tools-marquee { margin: 0; border-radius: 14px; border: 1px solid var(--line-strong); }
 /* Smaller on Home: the strip is a band under the head, not a section. */
-.home .tools-marquee__track { gap: 44px; padding: 14px 28px; }
+.home .tools-marquee__track { gap: 44px; padding: 14px 28px; animation-duration: 32s; }
 .home .tools-marquee__item { gap: 10px; padding-right: 44px; font-size: 13.5px; }
 .home .tools-marquee__item::after { height: 16px; }
 .home .tools-marquee__icon, .home .tools-marquee__img, .home .tools-marquee__mark { width: 20px; height: 20px; }
