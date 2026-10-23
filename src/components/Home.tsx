@@ -72,7 +72,7 @@ export default function Home() {
         title="Unmute for voice-over"
       >
         <source
-          src={`${import.meta.env.BASE_URL}videos/dennis-leal-wfm-intro.mp4?v=5`}
+          src={`${import.meta.env.BASE_URL}videos/dennis-leal-wfm-intro.mp4?v=6`}
           type="video/mp4"
         />
         Your browser does not support embedded video.
