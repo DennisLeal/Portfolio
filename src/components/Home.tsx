@@ -68,11 +68,11 @@ export default function Home() {
         width={270}
         height={480}
         poster={profile.hero.portraitSrc}
-        aria-label="A 20-second animated introduction to Dennis Leal's WFM experience and projects. Unmute for a spoken voice-over."
+        aria-label="An animated introduction to Dennis Leal's WFM experience and projects. Unmute for a spoken voice-over."
         title="Unmute for voice-over"
       >
         <source
-          src={`${import.meta.env.BASE_URL}videos/dennis-leal-wfm-intro.mp4?v=4`}
+          src={`${import.meta.env.BASE_URL}videos/dennis-leal-wfm-intro.mp4?v=5`}
           type="video/mp4"
         />
         Your browser does not support embedded video.
